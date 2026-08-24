@@ -2,7 +2,9 @@
 
 ## Supported versions
 
-Security fixes are provided for the latest released Pannonico version.
+Security fixes are provided for the latest released Pannonico version. This
+policy covers the CLI npm packages, standalone release assets, and Visual
+Studio Code extension.
 
 | Version | Supported |
 | --- | --- |
