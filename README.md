@@ -8,23 +8,23 @@ before starting it.
 
 ## Command-line interface
 
-Install the versioned npm package globally:
+Install the current npm release globally:
 
 ```sh
-npm install --global pannonico@0.1.1
+npm install --global pannonico@latest
 pannonico --version
 ```
 
 Or run the same release without a global installation:
 
 ```sh
-npx --yes pannonico@0.1.1 --version
+npx --yes pannonico@0.1.2 --version
 ```
 
 See the [CLI installation and usage guide](docs/cli.md) for supported
 platforms, native and bundled-WASI behavior, integrity verification, the
 embedded user manual, and troubleshooting. Standalone binaries are available
-from the [`v0.1.1` GitHub Release](https://github.com/vx-rs/pannonico/releases/tag/v0.1.1).
+from the [`v0.1.2` GitHub Release](https://github.com/vx-rs/pannonico/releases/tag/v0.1.2).
 
 ## Visual Studio Code extension
 

@@ -1,8 +1,8 @@
 # Pannonico command-line interface
 
 Pannonico Free is distributed through npm and as standalone release assets.
-Use one version consistently when installing, reporting a problem, or
-verifying downloaded files. The commands below use `0.1.1`.
+Record the installed version when reporting a problem or verifying downloaded
+files. Release-specific commands below use `0.1.2`.
 
 ## Install with npm
 
@@ -10,26 +10,26 @@ The npm launcher requires Node.js 24 or newer. A global installation provides
 the `pannonico` command:
 
 ```sh
-npm install --global pannonico@0.1.1
+npm install --global pannonico@latest
 pannonico --version
 ```
 
 To run one exact release without keeping a global installation:
 
 ```sh
-npx --yes pannonico@0.1.1 --version
+npx --yes pannonico@0.1.2 --version
 ```
 
 The launcher supports these native packages:
 
-| Operating system | Architecture | Native npm package |
-| --- | --- | --- |
-| Linux | x64 | `@vx.rs/pannonico-linux-x64` |
-| Linux | arm64 | `@vx.rs/pannonico-linux-arm64` |
-| macOS | x64 | `@vx.rs/pannonico-darwin-x64` |
-| macOS | arm64 | `@vx.rs/pannonico-darwin-arm64` |
-| Windows | x64 | `@vx.rs/pannonico-win32-x64` |
-| Windows | arm64 | `@vx.rs/pannonico-win32-arm64` |
+| Operating system | Architecture | Native npm package              |
+|------------------|--------------|---------------------------------|
+| Linux            | x64          | `@vx.rs/pannonico-linux-x64`    |
+| Linux            | arm64        | `@vx.rs/pannonico-linux-arm64`  |
+| macOS            | x64          | `@vx.rs/pannonico-darwin-x64`   |
+| macOS            | arm64        | `@vx.rs/pannonico-darwin-arm64` |
+| Windows          | x64          | `@vx.rs/pannonico-win32-x64`    |
+| Windows          | arm64        | `@vx.rs/pannonico-win32-arm64`  |
 
 The selected native package is optional because the `pannonico` package also
 contains a WASI build. The launcher verifies version, edition, source revision,
@@ -61,19 +61,19 @@ project files.
 
 ## Download a standalone binary
 
-The [`v0.1.1` GitHub Release](https://github.com/vx-rs/pannonico/releases/tag/v0.1.1)
-contains the integrity [manifest](https://github.com/vx-rs/pannonico/releases/download/v0.1.1/manifest.json)
+The [`v0.1.2` GitHub Release](https://github.com/vx-rs/pannonico/releases/tag/v0.1.2)
+contains the integrity [manifest](https://github.com/vx-rs/pannonico/releases/download/v0.1.2/manifest.json)
 and these runtime files:
 
-| Operating system or runtime | Architecture | Asset |
-| --- | --- | --- |
-| Linux | x64 | `pannonico-linux-x64` |
-| Linux | arm64 | `pannonico-linux-arm64` |
-| macOS | x64 | `pannonico-darwin-x64` |
-| macOS | arm64 | `pannonico-darwin-arm64` |
-| Windows | x64 | `pannonico-win32-x64.exe` |
-| Windows | arm64 | `pannonico-win32-arm64.exe` |
-| WASI Preview 1 | wasm | `pannonico.wasm` |
+| Operating system or runtime | Architecture | Asset                       |
+|-----------------------------|--------------|-----------------------------|
+| Linux                       | x64          | `pannonico-linux-x64`       |
+| Linux                       | arm64        | `pannonico-linux-arm64`     |
+| macOS                       | x64          | `pannonico-darwin-x64`      |
+| macOS                       | arm64        | `pannonico-darwin-arm64`    |
+| Windows                     | x64          | `pannonico-win32-x64.exe`   |
+| Windows                     | arm64        | `pannonico-win32-arm64.exe` |
+| WASI Preview 1              | wasm         | `pannonico.wasm`            |
 
 Compare the downloaded file's byte size and SHA-256 digest with its record in
 `manifest.json` before running it. For example:
