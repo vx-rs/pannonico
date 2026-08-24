@@ -2,7 +2,7 @@
 
 Pannonico Free is distributed through npm and as standalone release assets.
 Record the installed version when reporting a problem or verifying downloaded
-files. Release-specific commands below use `0.1.2`.
+files. Release-specific commands below use `0.1.3`.
 
 ## Install with npm
 
@@ -17,7 +17,7 @@ pannonico --version
 To run one exact release without keeping a global installation:
 
 ```sh
-npx --yes pannonico@0.1.2 --version
+npx --yes pannonico@0.1.3 --version
 ```
 
 The launcher supports these native packages:
@@ -61,8 +61,8 @@ project files.
 
 ## Download a standalone binary
 
-The [`v0.1.2` GitHub Release](https://github.com/vx-rs/pannonico/releases/tag/v0.1.2)
-contains the integrity [manifest](https://github.com/vx-rs/pannonico/releases/download/v0.1.2/manifest.json)
+The [`v0.1.3` GitHub Release](https://github.com/vx-rs/pannonico/releases/tag/v0.1.3)
+contains the integrity [manifest](https://github.com/vx-rs/pannonico/releases/download/v0.1.3/manifest.json)
 and these runtime files:
 
 | Operating system or runtime | Architecture | Asset                       |

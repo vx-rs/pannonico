@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.3
+
+- Replaced the public repository and npm package overview with concise CLI and
+  Visual Studio Code installation instructions.
+- Linked the complete CLI guide and documented `pannonico manual` as the
+  version-matched documentation entry point.
+
 ## 0.1.2
 
 - Added seven public npm packages for the Pannonico Free command-line tool: the
