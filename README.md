@@ -20,16 +20,28 @@ repository makes no speed claim.
 
 ## Install
 
-Pannonico 0.1.3 is available through npm and requires Node.js 24 or newer:
+Install the latest Pannonico Free CLI with Node.js 24 or newer:
 
 ```sh
-npm install --global pannonico@0.1.3
+npm install --global pannonico@latest
 pannonico --version
 ```
 
-The launcher selects a matching native package when available and otherwise
-uses its bundled WASI Preview 1 product. See the [CLI guide](docs/cli.md) for
-installation, integrity, command, and troubleshooting details.
+Matching standalone native and WASI binaries are attached only to versioned
+[GitHub Releases](https://github.com/vx-rs/pannonico/releases). Binaries are not
+committed to this Git repository and do not use Git LFS.
+
+## Documentation
+
+Browse the complete [user manual](docs/README.md). To copy the manual matching
+an installed binary into a directory where relative links work, run:
+
+```sh
+pannonico manual --eject [root]
+pannonico scaffold --with-docs [root]
+```
+
+Both commands write the same manual below `<root>/documentation/`.
 
 ## Editor support
 
@@ -45,9 +57,10 @@ steps. Strict cross-version compatibility begins with 1.0.0.
 ## Support, security, and licensing
 
 Use [Pannonico Issues](https://github.com/vx-rs/pannonico/issues) for CLI
-installation, invocation, scaffolding, build, and npm reports. Read
-[SUPPORT.md](SUPPORT.md) before filing a report. Suspected vulnerabilities must
-use the private process in [SECURITY.md](SECURITY.md), not a public issue.
+installation, invocation, scaffolding, builds, manual behavior, npm packages,
+and standalone assets. Read [SUPPORT.md](SUPPORT.md) before filing a report.
+Suspected vulnerabilities must use the private process in
+[SECURITY.md](SECURITY.md), not a public issue.
 
 Pannonico Free is available under either included PolyForm license, at your
 option. See [LICENSE](LICENSE). Changes are recorded in [CHANGELOG.md](CHANGELOG.md).
