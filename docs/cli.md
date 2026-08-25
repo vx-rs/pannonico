@@ -1,116 +1,48 @@
-# Pannonico command-line interface
+# Pannonico 0.1.3 command-line guide
 
-Pannonico Free is distributed through npm and as standalone release assets.
-Record the installed version when reporting a problem or verifying downloaded
-files. Release-specific commands below use `0.1.3`.
+Pannonico Free 0.1.3 is distributed through npm. No standalone GitHub Release
+was published for this CLI version; use npm rather than an absent release URL.
 
 ## Install with npm
 
-The npm launcher requires Node.js 24 or newer. A global installation provides
-the `pannonico` command:
+The launcher requires Node.js 24 or newer:
 
 ```sh
-npm install --global pannonico@latest
+npm install --global pannonico@0.1.3
 pannonico --version
 ```
 
-To run one exact release without keeping a global installation:
+Run an exact release without retaining a global installation:
 
 ```sh
 npx --yes pannonico@0.1.3 --version
 ```
 
-The launcher supports these native packages:
+The launcher supports Linux, macOS, and Windows on x64 and arm64 through the
+matching `@vx.rs/pannonico-<platform>-<architecture>` package. Those packages
+are optional because `pannonico` also contains a WASI Preview 1 fallback. The
+launcher verifies version, edition, source revision, target, file type, size,
+and SHA-256 identity before starting either runtime.
 
-| Operating system | Architecture | Native npm package              |
-|------------------|--------------|---------------------------------|
-| Linux            | x64          | `@vx.rs/pannonico-linux-x64`    |
-| Linux            | arm64        | `@vx.rs/pannonico-linux-arm64`  |
-| macOS            | x64          | `@vx.rs/pannonico-darwin-x64`   |
-| macOS            | arm64        | `@vx.rs/pannonico-darwin-arm64` |
-| Windows          | x64          | `@vx.rs/pannonico-win32-x64`    |
-| Windows          | arm64        | `@vx.rs/pannonico-win32-arm64`  |
+## Commands
 
-The selected native package is optional because the `pannonico` package also
-contains a WASI build. The launcher verifies version, edition, source revision,
-target, file type, size, and SHA-256 identity before starting a runtime. It uses
-the native executable when available and falls back to its bundled WASI file on
-an unsupported host, when the optional native package is unavailable, or when
-the operating system rejects the native executable before it starts.
+- `pannonico scaffold [flags] [root]` creates a starter site.
+- `pannonico build [flags] [root | page]` builds or dry-runs a site.
+- `pannonico mcp [root]` serves built-in MCP tools over stdio.
+- `pannonico capabilities` shows the compiled product capabilities.
+- `pannonico --help` and `pannonico help <command>` show command usage.
 
-A package identity, integrity, or declared executable-mode mismatch is an
-error. The launcher also does not switch runtimes after a native process has
-started. This prevents a command from running twice after it may have changed
-files.
-
-## Read the installed manual
-
-The complete user manual is embedded in every native and WASI product, so its
-content always matches the installed version. Use `pannonico manual` to print
-the manual index, then list or read exact topics:
-
-```sh
-pannonico manual
-pannonico manual --list
-pannonico manual quick-start
-pannonico manual authoring/configuration
-```
-
-The manual command reads embedded documentation and does not install or modify
-project files.
-
-## Download a standalone binary
-
-The [`v0.1.3` GitHub Release](https://github.com/vx-rs/pannonico/releases/tag/v0.1.3)
-contains the integrity [manifest](https://github.com/vx-rs/pannonico/releases/download/v0.1.3/manifest.json)
-and these runtime files:
-
-| Operating system or runtime | Architecture | Asset                       |
-|-----------------------------|--------------|-----------------------------|
-| Linux                       | x64          | `pannonico-linux-x64`       |
-| Linux                       | arm64        | `pannonico-linux-arm64`     |
-| macOS                       | x64          | `pannonico-darwin-x64`      |
-| macOS                       | arm64        | `pannonico-darwin-arm64`    |
-| Windows                     | x64          | `pannonico-win32-x64.exe`   |
-| Windows                     | arm64        | `pannonico-win32-arm64.exe` |
-| WASI Preview 1              | wasm         | `pannonico.wasm`            |
-
-Compare the downloaded file's byte size and SHA-256 digest with its record in
-`manifest.json` before running it. For example:
-
-```sh
-sha256sum pannonico-linux-x64
-```
-
-On macOS, use `shasum -a 256`. On Windows PowerShell, use
-`Get-FileHash -Algorithm SHA256`. A POSIX download may not retain executable
-permission; add it only after verifying the file:
-
-```sh
-chmod 0755 pannonico-linux-x64
-./pannonico-linux-x64 --version
-```
-
-Choose the filename for your operating system and architecture. The raw WASI
-asset is for compatible WASI Preview 1 hosts; the npm launcher already contains
-and hosts the same WASI product when fallback is needed.
+Repository documentation is the linked, browsable reference for this release.
 
 ## Troubleshooting
 
-- Confirm `node --version` reports Node 24 or newer for npm and `npx` use.
-- Run `pannonico --version` to record the product version, edition, and selected
-  target.
-- Set `PANNONICO_LAUNCHER_DEBUG=1` for safe runtime-selection diagnostics. Set
-  `PANNONICO_FORCE_WASI=1` to check the bundled WASI path explicitly.
-- If an optional native package is missing, retry the versioned installation
-  with a working registry connection. The bundled WASI runtime remains the
-  supported fallback.
-- If verification reports changed bytes or metadata, remove the installation,
-  reinstall the exact version, and do not run an unverified standalone file.
-- If a standalone POSIX binary reports permission denied, verify its digest and
-  then apply the `chmod` command above.
+- Confirm `node --version` reports Node 24 or newer.
+- Record `pannonico --version`, the operating system, and architecture.
+- Set `PANNONICO_LAUNCHER_DEBUG=1` only for runtime-selection diagnostics, and
+  redact its output before sharing it.
+- Reinstall the exact version if package verification reports changed bytes or
+  metadata. Do not run an unverified artifact.
 
-For usage questions and reproducible bugs, follow the [support guide](../SUPPORT.md).
-Report suspected vulnerabilities through the private process in the
-[security policy](../SECURITY.md). Pannonico Free's terms are in the
-[license chooser](../LICENSE).
+Use [Pannonico Issues](https://github.com/vx-rs/pannonico/issues) for CLI
+reports. Suspected vulnerabilities use the private process in
+[SECURITY.md](../SECURITY.md).
