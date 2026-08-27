@@ -59,22 +59,23 @@ available capability names shown by `pannonico capabilities`.
 | `--verbose`                  | Add resolved paths, edition metadata, defaults, validation/image policy, and sitemap plan/publication state. |
 | `--no-color`                 | Disable all Pannonico ANSI presentation color.                                                               |
 
-Native publication starts from eight staged-file workers per available Go
+Native publication starts from thirty-two staged-file workers per available Go
 execution thread and is bounded by artifact count. Free and Pro use the same
 policy without an edition-specific ceiling. A positive
 `--max-output-workers` value can lower the applicable limit in either edition;
-it cannot raise the thread-derived count. The flag is separate from Pro
-`--jobs`, which controls page rendering. WASI and additive ad hoc publication
-remain serial.
+it cannot raise the thread-derived count. The flag is separate from `--jobs`,
+which controls page rendering in both native editions. WASI and additive ad
+hoc publication remain serial.
 
-Native Pro additionally accepts repeatable `--data-url URL` flags with exactly
-one HTTPS JSON/YAML source per occurrence. It also accepts `--jobs COUNT`, from `1` through the host's
-logical CPU count, plus `--beautify` and `--minify`. Beautification emits
+Both native editions accept `--jobs COUNT`, from `1` through the host's logical
+CPU count. The default worker count is the smaller of sixteen and the logical CPU
+count; one page or one worker stays on the serial path. Native Pro additionally
+accepts repeatable `--data-url URL` flags with exactly one HTTPS JSON/YAML
+source per occurrence, plus `--beautify` and `--minify`. Beautification emits
 readable two-space-indented HTML; minification emits conservative compact HTML.
-The output flags are mutually exclusive. The default worker count is the
-smaller of four and the logical CPU count. One page or one worker stays on the
-serial path. Free recognizes these stable options, then returns
-`CAPABILITY_UNSUPPORTED` and status `4` before feature side effects.
+The output flags are mutually exclusive. Free recognizes these stable Pro
+options, then returns `CAPABILITY_UNSUPPORTED` and status `4` before feature
+side effects.
 
 Sitemap generation has no CLI flag. Configure `site.url` and optional
 `sitemap.enabled` in version-1 project configuration. A verbose build reports
@@ -129,8 +130,9 @@ decimal size in `B`, `KB`, or `MB`. When image optimization produces a smaller
 file, that image's row shows `source size → output size`; images that retain
 their original bytes show one size like every other artifact. Paths are padded
 to the longest planned final artifact so sizes form one live column without
-delaying staged-write notifications. Artifact lines remain sorted even when Pro
-renders pages in parallel. Final promotion is still atomic; a later
+delaying staged-write notifications. Artifact lines remain sorted even when
+either native edition renders pages in parallel. Final promotion is still
+atomic; a later
 verification or promotion failure may follow staged-file lines with a failed
 result and diagnostic.
 

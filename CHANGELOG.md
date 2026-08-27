@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.3.0
+
+- Made bounded native page rendering and `--jobs` shared Free and Pro
+  behavior. Both editions now default to the smaller of sixteen workers and
+  the host's logical CPU count. Native staged-file publication uses the same
+  bounded worker policy in both editions, while both WASI products remain
+  serial.
+- Reduced native build allocation and filesystem work in quiet progress,
+  rendering ownership, source validation, directive-free HTML processing, and
+  staged-output verification without changing output bytes or atomic
+  publication.
+
 ## 0.2.0
 
 - Separated CLI, LSP, and VS Code release lifecycles and kept standalone binaries as

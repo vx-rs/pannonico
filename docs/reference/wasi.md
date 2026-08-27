@@ -14,7 +14,8 @@ selected project, and Pannonico's normal symlink and regular-file checks still
 apply inside it.
 
 Free WASI supports build, dry run, JSON reports, scaffold, local manual
-ejection, MCP stdio, and capability metadata. Bare/help manual forms require
+ejection, MCP stdio, and capability metadata. Both WASI editions render pages
+serially and exclude the native page scheduler. Bare/help manual forms require
 no preopen. `manual --eject` receives one selected writable root, while
 `scaffold --with-docs` reuses the scaffold root. Pro WASI also supports HTML
 beautification and minification. It accepts `--jobs 1`; a larger value requests

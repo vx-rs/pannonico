@@ -37,13 +37,16 @@ native-only implementation available.
 The standard Free product selects the Free runtime at compile time.
 
 Free native includes the core build, scaffold, manual, localization, Markdown,
-validation, sitemap generation, file routing, image optimization, atomic output, Vite manifest,
-and managed Vite process capabilities. Free WASI declares the same product
-surface without `vite-process`. It can consume an existing Vite manifest but
+validation, sitemap generation, file routing, image optimization, atomic
+output, parallel rendering, Vite manifest, and managed Vite process
+capabilities. Its page-worker default is the smaller of sixteen and the host's
+logical CPU count; `--jobs` may select from one through that logical-CPU count.
+Free WASI declares the same product surface without `parallel-rendering` or
+`vite-process`. It remains serial, can consume an existing Vite manifest, and
 cannot execute Node or start Vite. Free and Pro use the same native
-complete-tree publication worker policy. CPU, artifact-count, and invocation
-limits still apply, but neither edition has a product-specific publication
-ceiling.
+page-rendering and complete-tree publication worker policies. CPU,
+artifact-count, and invocation limits still apply, but neither edition has a
+product-specific worker ceiling.
 
 Free uses base Markdown unless a project or page explicitly requests Rich
 Markdown. An explicit request is recognized as a stable product option and
@@ -57,9 +60,10 @@ selected stylesheet, removes the directive, and reports one warning. See
 
 The Pro product selects the Pro runtime at compile time.
 
-Pro native adds explicit Rich Markdown, bounded parallel rendering, HTML
-beautification, HTML minification, generic CSS inlining, bounded HTTPS data,
-watch, development serving, live reload, and managed Vite process behavior.
+Pro native adds explicit Rich Markdown, HTML beautification, HTML minification,
+generic CSS inlining, bounded HTTPS data, watch, development serving, and live
+reload. It uses the same bounded native page scheduler and managed Vite process
+behavior as Free native.
 Pro WASI retains CSS inlining, Rich Markdown, both pure HTML transformations,
 and `--jobs 1` but
 omits native process, server, live-reload, parallel, remote-data, and watch

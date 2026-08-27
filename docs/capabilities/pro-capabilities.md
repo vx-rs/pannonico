@@ -52,13 +52,15 @@ Decoded filenames share the ordinary `.data` collision rules with local files.
 Free, Pro WASI, and watch do not fetch remote data. The exact policy is in
 [`minimal-builds-and-data.md`](../build-and-output/minimal-builds-and-data.md).
 
-## Parallel page work
+## Shared native parallel page work
 
 `--jobs COUNT` bounds only independent per-page rendering, optional HTML
 transformation, and final validation. The limit cannot exceed the host's
-logical CPU count. Discovery, content and template preflight, result reduction,
-and output planning remain serial. Shared complete-tree publication separately
-uses at most eight native staging workers per available Go execution thread,
+logical CPU count. Native Free and Pro expose the same page-worker default,
+maximum, scheduler, and command-line control. Discovery, content and template
+preflight, result reduction, and output planning remain serial. Shared
+complete-tree publication separately
+uses at most thirty-two native staging workers per available Go execution thread,
 bounded by artifact count. Pro has no additional edition ceiling, while the
 shared positive `--max-output-workers` flag can lower the pool for one build or
 watch invocation. This publication cap is independent of `--jobs`.

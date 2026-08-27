@@ -18,21 +18,21 @@ The npm launcher verifies its selected native or WASI artifact against the
 packaged manifest before execution. It uses native code on a supported host and
 falls back to the bundled WASI module when a native package is unavailable.
 
-## Standalone CLI 0.2.0
+## Standalone CLI 0.3.0
 
-Pannonico Free 0.2.0 is also distributed as immutable GitHub Release assets.
+Pannonico Free 0.3.0 is also distributed as immutable GitHub Release assets.
 Download the manifest and exactly one runtime for the target host:
 
-- [`manifest.json`](https://github.com/vx-rs/pannonico/releases/download/v0.2.0/manifest.json)
-- [`pannonico-darwin-arm64`](https://github.com/vx-rs/pannonico/releases/download/v0.2.0/pannonico-darwin-arm64)
-- [`pannonico-darwin-x64`](https://github.com/vx-rs/pannonico/releases/download/v0.2.0/pannonico-darwin-x64)
-- [`pannonico-linux-arm64`](https://github.com/vx-rs/pannonico/releases/download/v0.2.0/pannonico-linux-arm64)
-- [`pannonico-linux-x64`](https://github.com/vx-rs/pannonico/releases/download/v0.2.0/pannonico-linux-x64)
-- [`pannonico-win32-arm64.exe`](https://github.com/vx-rs/pannonico/releases/download/v0.2.0/pannonico-win32-arm64.exe)
-- [`pannonico-win32-x64.exe`](https://github.com/vx-rs/pannonico/releases/download/v0.2.0/pannonico-win32-x64.exe)
-- [`pannonico.wasm`](https://github.com/vx-rs/pannonico/releases/download/v0.2.0/pannonico.wasm)
+- [`manifest.json`](https://github.com/vx-rs/pannonico/releases/download/v0.3.0/manifest.json)
+- [`pannonico-darwin-arm64`](https://github.com/vx-rs/pannonico/releases/download/v0.3.0/pannonico-darwin-arm64)
+- [`pannonico-darwin-x64`](https://github.com/vx-rs/pannonico/releases/download/v0.3.0/pannonico-darwin-x64)
+- [`pannonico-linux-arm64`](https://github.com/vx-rs/pannonico/releases/download/v0.3.0/pannonico-linux-arm64)
+- [`pannonico-linux-x64`](https://github.com/vx-rs/pannonico/releases/download/v0.3.0/pannonico-linux-x64)
+- [`pannonico-win32-arm64.exe`](https://github.com/vx-rs/pannonico/releases/download/v0.3.0/pannonico-win32-arm64.exe)
+- [`pannonico-win32-x64.exe`](https://github.com/vx-rs/pannonico/releases/download/v0.3.0/pannonico-win32-x64.exe)
+- [`pannonico.wasm`](https://github.com/vx-rs/pannonico/releases/download/v0.3.0/pannonico.wasm)
 
-Require the manifest's Free edition, version `0.2.0`, full source revision, and
+Require the manifest's Free edition, version `0.3.0`, full source revision, and
 matching target record. Before execution, verify the downloaded filename, byte
 size, lowercase SHA-256 digest, and executable mode against that record. Keep
 the manifest and runtime from the same immutable release. The standalone files

@@ -6,15 +6,14 @@
 either of its Free licenses.
 
 **Pannonico Pro** adds integrated development automation, bounded external
-data, advanced content, parallel rendering controls, and output
-transformations. Pro always
+data, advanced content, and output transformations. Pro always
 requires separately approved paid Pro or commercial terms; eligibility for a
 Free license does not grant Pro entitlement.
 
 The governing rule is:
 
-> Free must be complete in what it can build. Pro may add automation,
-> concurrency controls, and optional transformations.
+> Free must be complete in what it can build. Pro may add automation and
+> optional content and output transformations.
 
 ## Functionality comparison
 
@@ -31,7 +30,7 @@ The governing rule is:
 | Data | Remote HTTPS YAML/JSON | No | Yes | Native Pro automates bounded external data acquisition. It is unavailable under WASI. |
 | Localization | Catalogs, translated pages, and language links | Yes | Yes | Content correctness remains shared. |
 | Rendering | Deterministic serial page rendering | Yes | Yes | Shared baseline execution. |
-| Rendering | Parallel page rendering | No | Yes | Native Pro can schedule pages across a bounded, configurable worker count. Representative public benchmark results have not yet been published. |
+| Rendering | Parallel page rendering | Yes | Yes | Both native editions use the same bounded, configurable page-worker policy. WASI remains serial. Representative public benchmark results have not yet been published. |
 | Output | HTML generation | Yes | Yes | Free output is complete and production-ready. |
 | Output | Deterministic sitemap generation | Yes | Yes | Both editions and native/WASI targets publish the same `sitemap.xml` for the same rendered routes. |
 | Output | HTML validation | Yes | Yes | Validation is a correctness feature. |
@@ -42,7 +41,7 @@ The governing rule is:
 | Assets | Ordered `.pannonico` file routing | Yes | Yes | Both editions support `pannonico`, `copy`, `vite`, and `exclude` rules within configured source roots. Users can place third-party assets under a source root such as `pages/assets/vendor/` and route them explicitly. |
 | Assets | Default same-path JPEG and PNG optimization | Yes | Yes | Both editions optimize Pannonico-owned `.jpg`, `.jpeg`, and `.png` assets and remove source metadata, including EXIF and GPS data, from selected smaller web outputs. Reports and MCP builds list removed metadata categories once as build information; gain-map removal publishes the base SDR image. Exact `.pannonico` `copy` routes remain byte-identical, and `images.optimize: false` disables optimization project-wide. |
 | Publishing | Atomic complete-tree publication and safe additive output | Yes | Yes | Publication safety remains shared. |
-| Publishing | Publication worker policy without an edition ceiling | Yes | Yes | Both editions use the same bounded staged-file publication policy. Page-rendering concurrency is a separate native Pro capability. |
+| Publishing | Publication worker policy without an edition ceiling | Yes | Yes | Both native editions use the same bounded staged-file publication policy, independently of page-rendering concurrency. |
 | Vite | Manifest consumption and template metadata | Yes | Yes | Both editions work with Vite-produced assets. |
 | Vite | Managed Vite production build | Yes | Yes | Available on native targets. WASI consumes a prebuilt manifest. |
 | Development | Integrated development mode | No | Yes | Native Pro provides automatic rebuilds, a preview server, live browser reload, a managed configured Vite development server, and preservation of the last working preview after failed builds. Free uses explicit build and browser-refresh steps. |
@@ -61,7 +60,6 @@ The governing rule is:
 ### Developer-time savings
 
 - Integrated development mode
-- Parallel page rendering
 - Remote HTTPS data
 
 ### Advanced content
@@ -79,8 +77,8 @@ The governing rule is:
 - Native Free and Pro can run managed Vite production builds.
 - Sitemap generation, file routing, and JPEG/PNG optimization are available in Free and Pro on
   native and WASI targets.
-- Integrated development mode, remote HTTPS data, and parallel page rendering
-  are native Pro capabilities.
+- Parallel page rendering is available in both native editions. Integrated
+  development mode and remote HTTPS data are native Pro capabilities.
 - Pro WASI retains pure transformations such as Rich Markdown, minification,
   beautification, and CSS inlining. It cannot provide child processes, network
   data, or native development automation.

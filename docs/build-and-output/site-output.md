@@ -108,13 +108,13 @@ use `0755`; files use `0644`. Files are created exclusively, written fully,
 synced, and closed.
 
 Complete-tree publication creates the sorted set of staging directories before
-it starts file writes. Native builds then use at most eight artifact workers per
-available Go execution thread, bounded further by artifact count. Free and Pro
-use the same publication worker policy without an edition-specific ceiling. A
-positive `--max-output-workers` value may lower either edition's pool and
-cannot raise the thread-derived limit. Each worker owns at most one open artifact
-and still performs the full exclusive-create, write, sync, and close sequence.
-WASI and ad hoc no-clobber publication remain serial.
+it starts file writes. Native builds then use at most thirty-two artifact
+workers per available Go execution thread, bounded further by artifact count.
+Free and Pro use the same publication worker policy without an edition-specific
+ceiling. A positive `--max-output-workers` value may lower either edition's pool
+and cannot raise the thread-derived limit. Each worker owns at most one open
+artifact and still performs the full exclusive-create, write, sync, and close
+sequence. WASI and ad hoc no-clobber publication remain serial.
 
 The output plan keeps one result slot per sorted artifact. After the workers
 finish, the coordinator reports successful file events in output-path order.
