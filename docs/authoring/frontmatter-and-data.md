@@ -12,7 +12,7 @@ Page and layout frontmatter uses YAML between exact delimiter lines:
 ---
 title: About
 ---
-<h1>About</h1>
+<h1>{{.page.title}}</h1>
 ```
 
 Rules:

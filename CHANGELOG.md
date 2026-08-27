@@ -2,7 +2,7 @@
 
 ## 0.2.0
 
-- Separated CLI and editor release lifecycles and kept standalone binaries as
+- Separated CLI, LSP, and VS Code release lifecycles and kept standalone binaries as
   GitHub Release assets rather than Git or Git LFS content.
 - Added `pannonico manual --eject [root]` and
   `pannonico scaffold --with-docs [root]` for linked local documentation.
