@@ -115,7 +115,28 @@ every saved page, layout, or partial containing
 `layouts/default.html` marks every page that explicitly or implicitly selects
 `default` with `LAYOUT_MISSING`. These are Error diagnostics for closed and open
 saved files; restoration clears them after the next reindex. Dynamic template
-names and a standalone partial's caller-dependent data context are not guessed.
+names are not guessed.
+
+For a standalone partial, the language server follows statically named calls
+from pages and selected layouts. An action forwards the complete renderer
+context only when it explicitly passes `.` outside a `range` or `with` body:
+
+```gotmpl
+{{template "components/card" .}}
+```
+
+The same rule applies through transitive partial calls. When every reachable
+call forwards the complete context, completion and hover expose only roots and
+children present in every caller. A field whose callers disagree on kind is
+reported as unknown, and an access below that incompatible field is a definite
+direct-path failure. Definition still requires one source. A path missing from
+any caller also produces a diagnostic in the partial.
+
+A call that omits dot, passes another value, or executes below a changed-dot
+body makes the target partial and its downstream calls ambiguous. Unreferenced
+partials and partials reached only from unselected layouts also remain
+ambiguous. Their completion, hover, definition, and direct-path diagnostics
+stay suppressed.
 
 ## Preflight and source safety
 

@@ -103,8 +103,14 @@ full root context, for example `{{template "menu" .}}`. Calling a partial with
 Editor support knows an exact `current` and `parent` for page documents. A
 standalone layout has an exact `tree` but only generic current-page and parent-
 directory fields; completion and diagnostics suppress descendants whose page
-depends on the runtime caller. A standalone partial has an ambiguous dot and
-therefore receives no root completion.
+depends on the runtime caller. A standalone partial receives inferred
+navigation only when every reachable invocation explicitly forwards unchanged
+dot. Calls from one page retain that page's exact `current` and `parent`.
+Calls from several pages use the same conservative selector as a standalone
+layout: the shared `tree` and generic current-page and parent-directory fields
+remain, while page-specific descendants, provenance, and definitions are
+suppressed. Any reachable replaced-dot call keeps the complete partial
+ambiguous and suppresses navigation results.
 
 Navigation completion labels are encoded keys. Completion detail and hover are
 value-free and identify the authored source, plus the public route for pages:
@@ -132,14 +138,15 @@ Navigation node "/" has no parent.
 Unknown Pannonico navigation path: .nav.tree.c.missing
 ```
 
-The language server recomputes these certain paths for all saved pages and
-layouts after a page or routing save. Deleting or renaming a referenced page
-therefore marks every affected saved source, including closed files, and
-restoring the page clears those findings. The strict renderer and MCP tools use
-the same navigation graph; a direct failure appears there when execution
-reaches the action.
+The language server recomputes these certain paths for all saved pages,
+layouts, and inferred full-root partials after a page or routing save. Deleting
+or renaming a referenced page therefore marks every affected saved source,
+including closed files, and restoring the page clears those findings. The
+strict renderer and MCP tools use the same navigation graph; a direct failure
+appears there when execution reaches the action.
 
-Uncertain layout, partial, and incomplete remote-data paths are not diagnosed.
+Caller-relative layout paths, ambiguous partial paths, and incomplete
+remote-data paths are not diagnosed.
 
 ## Identifier encoding reference
 

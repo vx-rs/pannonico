@@ -71,7 +71,8 @@ Ordinary map access uses Go template `missingkey=error` behavior:
 If `title` is absent, rendering stops with a source-positioned diagnostic.
 
 For saved local data, the language server also checks certain direct paths in
-every saved page and layout. If this source exists:
+every saved page and layout, plus partials whose reachable invocations all
+forward the unchanged renderer root. If this source exists:
 
 ```yaml
 company:

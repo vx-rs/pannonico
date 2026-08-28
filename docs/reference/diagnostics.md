@@ -21,8 +21,10 @@ strict cross-version compatibility begins with 1.0.0.
 ## Saved workspace diagnostics
 
 The Pannonico language server publishes definite reference failures for saved
-HTML and Markdown sources whether or not those files are open. A saved data or
-page change can therefore mark every affected page or layout at once:
+HTML and Markdown sources whether or not those files are open. This includes a
+partial when every reachable invocation explicitly forwards the unchanged
+renderer root. A saved data or page change can therefore mark every affected
+page, layout, or inferred partial at once:
 
 ```gotmpl
 {{.data.company.team.lead}}
@@ -37,11 +39,12 @@ Deleting a page's selected layout produces `LAYOUT_MISSING` on that page. The
 server replaces and clears these findings after each relevant saved-file
 reindex; unaffected closed files receive no empty notification.
 
-An unsaved open page or layout owns its direct-path diagnostics. Saved partial
-and layout findings are withheld while that template buffer differs from disk,
-then restored only after saving that exact template completes a usable reindex.
-Saving a data file does not mark an unrelated dirty template as synchronized.
-Standalone partial data/navigation paths remain ambiguous, and unknown paths
+An unsaved open template owns its direct-path diagnostics. Saved findings are
+withheld while that template buffer differs from disk, then restored only after
+saving that exact template completes a usable reindex. Saving a data file does
+not mark an unrelated dirty template as synchronized. Partial data and
+navigation paths remain ambiguous when any reachable call replaces dot, the
+partial is unreferenced, or only unselected layouts reference it. Unknown paths
 below configured remote data stay uncertain rather than becoming errors.
 
 VS Code stores these closed-resource diagnostics in its normal Problems index.
