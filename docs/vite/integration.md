@@ -20,10 +20,10 @@ partial, and production/development tag policy from an installed scaffold.
 
 ## Ownership
 
-Define build inputs in `vite.config.ts`. Map those source keys to stable template
+Define build inputs in `vite.config.js`. Map those source keys to stable template
 aliases in `pannonico.yaml`:
 
-```ts
+```js
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -36,11 +36,11 @@ export default defineConfig({
   },
   build: {
     manifest: true,
-    outDir: '.pannonico/vite',
+    outDir: 'frontend/.pannonico/vite',
     emptyOutDir: true,
     rolldownOptions: {
       input: {
-        app: 'src/app.ts',
+        app: 'frontend/src/app.ts',
       },
     },
   },
@@ -51,15 +51,15 @@ export default defineConfig({
 version: 1
 
 vite:
-  root: frontend
-  output: .pannonico/vite
+  root: .
+  output: frontend/.pannonico/vite
   manifest: .vite/manifest.json
   manifestFormat: auto
   publicPath: /
   entries:
-    app: src/app.ts
+    app: frontend/src/app.ts
   resources:
-    logo: src/logo.svg
+    logo: frontend/src/logo.svg
   buildCommand:
     executable: npm
     arguments: [run, assets:build]
@@ -70,7 +70,7 @@ vite:
 ```
 
 `entries.app` does not create a Vite entry. It names the exact manifest key or
-`src` value produced for the Vite input `src/app.ts`.
+`src` value produced for the Vite input `frontend/src/app.ts`.
 
 ### Routing sources inside Pannonico roots
 
@@ -199,7 +199,7 @@ import './app.scss'
 ```
 
 Production resolves the alias to hashed manifest URLs. Development resolves it
-to `devServer/src/app.ts`; Vite then serves SCSS, TypeScript, and imported assets.
+to `devServer/frontend/src/app.ts`; Vite then serves SCSS, TypeScript, and imported assets.
 The same layout and partial work for HTML and Markdown pages.
 
 ### Entry and resource aliases
@@ -217,11 +217,11 @@ Multiple script entries remain explicit template choices:
 ```yaml
 vite:
   entries:
-    app: src/app.ts
-    admin: src/admin.ts
-    theme: src/theme.scss
+    app: frontend/src/app.ts
+    admin: frontend/src/admin.ts
+    theme: frontend/src/theme.scss
   resources:
-    logo: src/logo.svg
+    logo: frontend/src/logo.svg
 ```
 
 ```html
@@ -300,7 +300,7 @@ that manifest. A missing or stale manifest remains an error. Run Vite on the
 host before calling the WASI module through the launcher that supplied it:
 
 ```text
-npm run assets:build --prefix frontend
+npm run assets:build
 pannonico build /absolute/site
 ```
 

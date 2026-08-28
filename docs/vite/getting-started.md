@@ -67,8 +67,6 @@ The final directory structure will start like this:
 my-site/
   frontend/
     src/
-    package.json
-    vite.config.ts
   layouts/
     default.html
   pages/
@@ -77,7 +75,11 @@ my-site/
       site.css
   partials/
     vite.html
+  package.json
+  package-lock.json
   pannonico.yaml
+  tsconfig.json
+  vite.config.js
 ```
 
 ## 2. Create the frontend package
@@ -86,10 +88,8 @@ Create the frontend directory and install Vite:
 
 ```sh
 mkdir -p frontend/src
-cd frontend
 npm init --yes
 npm install --save-dev vite@8
-cd ..
 ```
 
 The site accepts Vite 8 releases. Vite `8.2.2` is the current concrete release
@@ -97,7 +97,7 @@ covered by the repository's locked real-build fixture. Check the compatibility
 table in [`vite-integration.md`](integration.md) before changing the major.
 
 Set `private` and `type`, then add the Vite scripts in
-`frontend/package.json`. Merge these fields into the generated file. Preserve
+`package.json`. Merge these fields into the generated file. Preserve
 the `devDependencies` entry that npm created for Vite:
 
 ```json
@@ -112,15 +112,15 @@ the `devDependencies` entry that npm created for Vite:
 }
 ```
 
-Commit `frontend/package-lock.json`. The site owns and locks its Vite version.
+Commit `package-lock.json`. The site owns and locks its Vite version.
 Pannonico selects a supported manifest format from the manifest content, not
 from the installed Vite version.
 
 ## 3. Define the Vite input
 
-Create `frontend/vite.config.ts`:
+Create `vite.config.js` at the project root:
 
-```ts
+```js
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -133,11 +133,11 @@ export default defineConfig({
   },
   build: {
     manifest: true,
-    outDir: '.pannonico/vite',
+    outDir: 'frontend/.pannonico/vite',
     emptyOutDir: true,
     rolldownOptions: {
       input: {
-        app: 'src/app.js',
+        app: 'frontend/src/app.js',
       },
     },
   },
@@ -199,8 +199,11 @@ Create `pannonico.yaml`:
 version: 1
 
 vite:
+  root: .
+  output: frontend/.pannonico/vite
+  manifest: .vite/manifest.json
   entries:
-    app: src/app.js
+    app: frontend/src/app.js
   buildCommand:
     executable: npm
     arguments: [run, assets:build]
@@ -210,21 +213,20 @@ vite:
   devServer: http://127.0.0.1:5173
 ```
 
-This uses the defaults `vite.root: frontend`,
-`vite.output: .pannonico/vite`, `vite.manifest: .vite/manifest.json`,
-`vite.manifestFormat: auto`, and `vite.publicPath: /`. Author those fields only
-when the project intentionally differs.
+This selects the project root as the command root while keeping frontend source
+and generated output below `frontend/`. It retains the defaults
+`vite.manifestFormat: auto` and `vite.publicPath: /`.
 
 The two `app` names have different roles:
 
 - `rolldownOptions.input.app` defines the Vite input.
 - `vite.entries.app` defines the stable alias used by Go templates.
 
-The Pannonico alias maps to `src/app.js`, which must match the source key in
+The Pannonico alias maps to `frontend/src/app.js`, which must match the source key in
 Vite's generated manifest. Defining `entries.app` does not create a Vite input.
 
-Pannonico runs each configured command in `vite.root`, which is `frontend/` in
-this example. It passes `arguments` literally and does not invoke a shell.
+Pannonico runs each configured command in `vite.root`, which is the project
+root in this example. It passes `arguments` literally and does not invoke a shell.
 
 Run the project-local Vite entrypoint directly so Pannonico owns the actual
 long-running process on POSIX and Windows:
@@ -297,7 +299,7 @@ pannonico build .
 
 Pannonico performs these actions in order:
 
-1. It runs `npm run assets:build` in `frontend/`.
+1. It runs `npm run assets:build` in the project root.
 2. It validates the generated Vite manifest and output tree.
 3. It renders the Pannonico pages.
 4. It publishes the pages and Vite assets together in `dist/`.
@@ -313,12 +315,10 @@ sanitized reproduction.
 
 ## 8. Switch to SCSS and TypeScript
 
-Install the SCSS compiler and TypeScript in the frontend package:
+Install the SCSS compiler and TypeScript in the root package:
 
 ```sh
-cd frontend
 npm install --save-dev sass@1 typescript@7
-cd ..
 ```
 
 Rename `frontend/src/app.css` to `frontend/src/app.scss`. SCSS syntax can now be
@@ -347,12 +347,12 @@ if (app) {
 }
 ```
 
-Change the Vite input in `frontend/vite.config.ts`:
+Change the Vite input in `vite.config.js`:
 
-```ts
+```js
 rolldownOptions: {
   input: {
-    app: 'src/app.ts',
+    app: 'frontend/src/app.ts',
   },
 },
 ```
@@ -361,7 +361,7 @@ Change the Pannonico source mapping in `pannonico.yaml`:
 
 ```yaml
 entries:
-  app: src/app.ts
+  app: frontend/src/app.ts
 ```
 
 The template still reads `.pannonico.vite.entries.app`. Only the source key
@@ -374,9 +374,9 @@ frontend convenience commands are:
 
 | npm command                              | Underlying command                               | Use                                            |
 |------------------------------------------|--------------------------------------------------|------------------------------------------------|
-| `npm run assets:build --prefix frontend` | `vite build`                                     | Write the production Vite output and manifest. |
-| `npm run assets:dev --prefix frontend`   | `vite --host 127.0.0.1 --port 5173 --strictPort` | Start the fixed local development server.      |
-| `npm run typecheck --prefix frontend`    | `tsc --noEmit`                                   | Check TypeScript without writing JavaScript.   |
+| `npm run assets:build` | `vite build`                                     | Write the production Vite output and manifest. |
+| `npm run assets:dev`   | `vite --host 127.0.0.1 --port 5173 --strictPort` | Start the fixed local development server.      |
+| `npm run typecheck`    | `tsc --noEmit`                                   | Check TypeScript without writing JavaScript.   |
 
 Run another production build:
 
@@ -420,7 +420,7 @@ To manage Vite yourself, remove `devCommand` from `pannonico.yaml`. Keep
 Terminal 1:
 
 ```sh
-npm run assets:dev --prefix frontend
+npm run assets:dev
 ```
 
 Terminal 2:
@@ -436,18 +436,16 @@ Pannonico waits for the external Vite server but does not own or stop it.
 Complete the SCSS and TypeScript steps first. Install Vue and its Vite plugin:
 
 ```sh
-cd frontend
 npm install vue@3
 npm install --save-dev @vitejs/plugin-vue@6
-cd ..
 ```
 
 These major lines match the same locked compatibility fixture as Vite. The
 site's package lock records the concrete versions tested together.
 
-Enable the plugin in `frontend/vite.config.ts`:
+Enable the plugin in `vite.config.js`:
 
-```ts
+```js
 import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 
@@ -462,11 +460,11 @@ export default defineConfig({
   },
   build: {
     manifest: true,
-    outDir: '.pannonico/vite',
+    outDir: 'frontend/.pannonico/vite',
     emptyOutDir: true,
     rolldownOptions: {
       input: {
-        app: 'src/app.ts',
+        app: 'frontend/src/app.ts',
       },
     },
   },
@@ -510,7 +508,7 @@ if (mount) {
 ```
 
 No Pannonico configuration or template change is required. Vite owns the Vue
-plugin and `.vue` files. Pannonico still sees the single `src/app.ts` manifest
+plugin and `.vue` files. Pannonico still sees the single `frontend/src/app.ts` manifest
 entry through the stable `app` alias.
 
 Use small mount elements for client-side islands when most of the page is
@@ -527,7 +525,7 @@ Remove `buildCommand` when another process or CI job builds the frontend. Build
 Vite before Pannonico:
 
 ```sh
-npm run assets:build --prefix frontend
+npm run assets:build
 pannonico build .
 ```
 
@@ -551,13 +549,13 @@ Compare these two values exactly:
 ```yaml
 # pannonico.yaml
 entries:
-  app: src/app.ts
+  app: frontend/src/app.ts
 ```
 
-```ts
-// frontend/vite.config.ts
+```js
+// vite.config.js
 input: {
-  app: 'src/app.ts',
+  app: 'frontend/src/app.ts',
 }
 ```
 

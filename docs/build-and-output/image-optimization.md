@@ -63,7 +63,7 @@ removed across the build:
 
 The entry is build information, not a warning. It has no image paths, does not
 increment `warningCount`, and is retained in JSON reports and MCP `build`
-results. The human CLI omits the `INFO IMAGE_METADATA_REMOVED` machine header
+results. The human CLI omits the `INFO Image metadata removed` header
 but prints the explanatory sentence and category bullets. The ordinary artifact
 rows identify optimized images and their before/after sizes.
 

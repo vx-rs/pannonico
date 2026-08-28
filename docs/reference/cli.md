@@ -22,6 +22,11 @@ defaults to the current directory. `pannonico help <command>` prints
 command-specific usage. Unknown syntax exits `2`; the known Pro-only `watch`
 command exits `4` in the Free binary.
 
+Top-level and manual help end with the documentation-site link. A release may
+compile one optional note after that link, separated by a blank line. The note
+is blue on a color-enabled stdout terminal, plain when color is suppressed or
+output is redirected, and absent when the release configures an empty value.
+
 A native Pro binary also provides `pannonico watch [flags] [root]`.
 
 ## MCP
@@ -139,7 +144,7 @@ result and diagnostic.
 Selected optimized images remove source metadata as a privacy feature. This
 adds one explanatory sentence and a deduplicated category list after a blank
 separator and before the final build result. Human output omits the
-`INFO IMAGE_METADATA_REMOVED` machine header, writes this build information to
+`INFO Image metadata removed` human header, writes this build information to
 standard output, and contains no image paths. JSON reports and MCP `build`
 results retain the full source-free information diagnostic. It does not
 increment `warningCount`.
@@ -203,7 +208,9 @@ profile from its compiled capabilities:
 
 Both Free and Pro WASI use the WASI profile. Scaffolding writes files only. It
 does not install npm dependencies or execute Vite. Follow the generated
-`README.md` to run `npm ci` and the profile-specific first build.
+`README.md` to run `npm install` from the project root and the profile-specific
+first build. After successful Vite scaffolding, the CLI identifies
+`frontend/` as the asset directory and prints this installation command.
 
 `--min` creates only `pannonico.yaml` containing `version: 1`. `--empty`
 creates only the four conventional source directories. `--min`, `--empty`, and

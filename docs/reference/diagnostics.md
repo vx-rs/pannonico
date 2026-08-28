@@ -49,6 +49,11 @@ With the built-in `problems.decorations.enabled` setting enabled (the default),
 VS Code decorates affected files and their ancestor Explorer directories red.
 Pannonico does not maintain a second decoration cache.
 
+The table below lists the stable machine codes retained by JSON reports, MCP
+results, and editor integrations. Human CLI headers translate these identities
+to English labels, such as `ERROR Invalid command argument`, while preserving
+the structured code for programmatic consumers.
+
 | Code | Meaning |
 | --- | --- |
 | `CLI_ARGUMENT_INVALID` | Command syntax or a flag value is invalid. |
