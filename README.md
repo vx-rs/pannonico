@@ -51,7 +51,7 @@ Both commands write the same manual below `<root>/documentation/`.
 ## Compatibility
 
 Every published 0.x version and its documentation remain immutable, but a later
-0.x release may introduce breaking changes. Release notes describe migration
+0.x release may introduce breaking changes. The changelog describes migration
 steps. Strict cross-version compatibility begins with 1.0.0.
 
 ## Support, security, and licensing
