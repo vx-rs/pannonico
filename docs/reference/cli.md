@@ -69,8 +69,8 @@ execution thread and is bounded by artifact count. Free and Pro use the same
 policy without an edition-specific ceiling. A positive
 `--max-output-workers` value can lower the applicable limit in either edition;
 it cannot raise the thread-derived count. The flag is separate from `--jobs`,
-which controls page rendering in both native editions. WASI and additive ad
-hoc publication remain serial.
+which controls content-source preparation and page rendering in both native
+editions. WASI and additive ad hoc publication remain serial.
 
 Both native editions accept `--jobs COUNT`, from `1` through the host's logical
 CPU count. The default worker count is the smaller of sixteen and the logical CPU

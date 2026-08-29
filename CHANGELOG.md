@@ -6,25 +6,28 @@ Every entry in this section starts with **CLI**, **LSP**, or **CLI and LSP**.
 An independent release moves only its selected track's entries into that
 track's version subsection.
 
-### Public changes
+## 0.4.0
 
-- **LSP:** Added conservative call-site context inference for standalone partials in
-  the language server. Completion, hover, unique-source definitions, and
-  definite saved direct-path diagnostics now work through selected page and
-  layout calls that explicitly forward unchanged dot, including transitive and
-  compatible multi-page calls. Replaced-dot, changed-dot, unreachable, and
-  mixed call sites remain suppressed.
-- **CLI:** Made bounded native page rendering and `--jobs` shared Free and Pro behavior.
+### CLI
+
+#### Public changes
+
+- Reduced native build overhead by scheduling source content loading and page
+  template preparation through the existing worker bound and by skipping
+  Markdown action parsing when no action opener is present. WASI behavior,
+  language-server indexing, output bytes, and diagnostic ordering remain
+  unchanged.
+- Made bounded native page rendering and `--jobs` shared Free and Pro behavior.
   Both editions now default to the smaller of sixteen workers and the host's
   logical CPU count and accept the same explicit range. Native staged-file
   publication now uses thirty-two I/O workers per available Go execution
   thread in both editions. Both WASI products remain serial.
-- **CLI:** Made the audience-organized user manual the single installed documentation
+- Made the audience-organized user manual the single installed documentation
   source for native and WASI binaries. The CLI and MCP now expose its complete
   hierarchy without source-repository access, retain earlier flat topic names
   as compatibility aliases, and exclude maintainer documentation from the
   compiled resource boundary.
-- **CLI:** Added default-on deterministic `sitemap.xml` generation in the existing
+- Added default-on deterministic `sitemap.xml` generation in the existing
   configuration and report version 1. Projects configure an absolute
   `site.url`, may explicitly disable generation, and may exclude individual
   rendered pages with `pannonico.sitemap.exclude` without suppressing page
@@ -33,7 +36,7 @@ track's version subsection.
   surfaces expose planned and committed generated-file state. During the
   pre-release prototype, configuration and report schema 1 continue evolving
   in place rather than creating version 2.
-- **CLI:** Added ordered project-root `.pannonico` rules for Pannonico, opaque-copy,
+- Added ordered project-root `.pannonico` rules for Pannonico, opaque-copy,
   Vite, and exclusion ownership within configured source roots. Added
   default-on same-path JPEG and PNG optimization for Pannonico-owned copied
   assets, with byte-identical explicit copies, metadata-aware fallback, and a
@@ -44,7 +47,7 @@ track's version subsection.
   the machine diagnostic header, alongside image before/after sizes. For a
   recognized gain-map JPEG, optimization removes the gain map and publishes
   only the base SDR image.
-- **CLI:** Changed the edition migration contract: unconfigured Pro now uses base
+- Changed the edition migration contract: unconfigured Pro now uses base
   Markdown, and existing projects that relied on implicit Rich Markdown plugins
   must opt in at project or page scope. Explicit Free Rich Markdown requests
   fail with `CAPABILITY_UNSUPPORTED`. Stable paid commands and options now parse
@@ -52,7 +55,7 @@ track's version subsection.
   schema-1 report carries capability denials through ordered
   `capability=<name>` and `reason=<edition|target|not-entitled>` diagnostic
   notes.
-- **CLI:** Added `pannonico mcp [root]`, a fixed-root stdio MCP server with authoritative
+- Added `pannonico mcp [root]`, a fixed-root stdio MCP server with authoritative
   project/page inspection, validation, page rendering, production build, and
   installed-version manual resources. The bounded surface is shared by Free
   and Pro native/WASI products and contains no filesystem editing or AI logic.
@@ -60,45 +63,45 @@ track's version subsection.
   return only diagnostic counts or page-related diagnostics. Stdio frames and
   pending work have fixed limits, session cancellation reaches active work,
   and invalid build-date environment diagnostics do not reflect their value.
-- **CLI and LSP:** Started the Go implementation with dependency and cross-target evidence.
-- **CLI:** Added the Free `build`, `scaffold`, `manual`, and `capabilities` commands,
+- Started the Go implementation with dependency and cross-target evidence.
+- Added the Free `build`, `scaffold`, `manual`, and `capabilities` commands,
   deterministic help/version output, process streams, and documented statuses.
-- **CLI:** Added a zero-config starter scaffold and embedded topic manual.
-- **CLI:** Added executable Free WASI builds with preopened project confinement, native
+- Added a zero-config starter scaffold and embedded topic manual.
+- Added executable Free WASI builds with preopened project confinement, native
   output parity, dry-run reports, scaffold, manual, and source-epoch support.
-- **CLI:** Added the authoritative full-site demo with approved Free output, Free
+- Added the authoritative full-site demo with approved Free output, Free
   native/WASI parity, dry-run report acceptance, and demo-resource exclusion
   checks.
-- **CLI:** Added lower-case `.md` pages, optional headline sections, tables,
+- Added lower-case `.md` pages, optional headline sections, tables,
   linkification, typographer punctuation, live Go template actions, and literal
   actions in code.
-- **CLI:** Added safe runtime `markdown` fragments and paired compile-time Markdown
+- Added safe runtime `markdown` fragments and paired compile-time Markdown
   blocks for authored HTML pages, layouts, and partials. The signed
   `html-only` tag marks the pre-Markdown baseline in all five product and
   distribution repositories.
-- **CLI:** Added optional Vite backend-manifest integration for hashed TypeScript, CSS,
+- Added optional Vite backend-manifest integration for hashed TypeScript, CSS,
   SCSS, Vue/plugin, imported-asset, and dynamic-import output. Templates retain
   control of tags, and HTML and Markdown use the same asset context.
-- **CLI:** Added structured native Vite build commands, external and WASI manifest
+- Added structured native Vite build commands, external and WASI manifest
   consumption, dry-run validation, and Pro Integrated development mode
   coordination with Vite HMR.
-- **CLI:** Added `pannonico scaffold --vite`, which creates a locked TypeScript/SCSS
+- Added `pannonico scaffold --vite`, which creates a locked TypeScript/SCSS
   starter and selects build-only Free native, build-and-watch Pro native, or
   process-free WASI configuration from compiled capabilities.
-- **CLI:** Added live build progress for native and WASI commands. Pannonico now reports
+- Added live build progress for native and WASI commands. Pannonico now reports
   phase starts, sorted file rows with aligned decimal sizes,
   terminal-aware file colors, and separated status-marked generation or failure
   timing during build and watch.
-- **CLI:** Simplified CSS inlining to use `pannonico-inline-css` as its only
+- Simplified CSS inlining to use `pannonico-inline-css` as its only
   control. Removed the prototype `css.inline` configuration field; Free now
   removes recognized directives, preserves stylesheet behavior, and emits one
   non-fatal `CSS_INLINING_IGNORED` warning per build. Reserved `pannonico-*`
   attributes now share strict preflight diagnostics and a directive-free final
   output audit; the old `data-pannonico-inline-css` spelling is a rename error.
 
-### Pro changes
+#### Pro changes
 
-- **CLI:** Added configurable Rich Markdown plugins for deterministic heading anchors,
+- Added configurable Rich Markdown plugins for deterministic heading anchors,
   named and inline footnotes, abbreviations, subscript, superscript, marks,
   insertions, and deletions in Pro native and Pro WASI. Base Markdown remains
   the default until project or page controls explicitly request the group or
@@ -106,80 +109,113 @@ track's version subsection.
   capability diagnostic. Executed
   footnotes now form one group ordered by their references in the final
   assembled page and placed as the last element of `.pannonico.content`.
-- **CLI:** Added opt-in generic CSS inlining in Pro native and Pro WASI. Explicitly
+- Added opt-in generic CSS inlining in Pro native and Pro WASI. Explicitly
   directive-selected embedded, copied, and production Vite stylesheets can apply static
   declarations before HTML formatting and validation; unsupported behavior
   remains residual, linked asset URLs are rebased, and the directive alone selects
   the transform.
-- **CLI:** Added compile-time native Pro composition with deterministic result
+- Added compile-time native Pro composition with deterministic result
   restoration, optional readable HTML beautification or
   conservative HTML minification, a coalescing file watcher, a last-good
   development server, and successful-promotion-only live reload.
-- **CLI:** Added mutually exclusive Pro-only `--beautify` and `--minify` output modes,
+- Added mutually exclusive Pro-only `--beautify` and `--minify` output modes,
   with transformation before final validation, plus native `--jobs` and
   `watch --host/--port/--open`. Default Free binaries expose and link neither
   transformer. The later shared native-worker change made `--jobs` available
   in Free as well.
-- **CLI:** Added target-filtered Pro WASI with both pure HTML transformations, explicit
+- Added target-filtered Pro WASI with both pure HTML transformations, explicit
   `--jobs 1` serial compatibility, and status-4 rejection for parallel jobs and
   native-only Integrated development mode.
-- **CLI:** Added Pro Vite development startup, readiness polling, config refresh,
+- Added Pro Vite development startup, readiness polling, config refresh,
   frontend-change exclusion, child-failure propagation, and bounded cleanup.
-- **CLI:** Added approved Pro full-demo output and exact serial/parallel rendering
+- Added approved Pro full-demo output and exact serial/parallel rendering
   parity across the complete generated and pass-through tree.
 
-### Internal changes
+#### Internal changes
 
-- **CLI:** Added protocol-neutral inspection projections, the official Go MCP SDK
+- Added protocol-neutral inspection projections, the official Go MCP SDK
   v1.7.0 adapter, fresh-call performance benchmarks, real native command
   acceptance, and one focused WASI lifecycle smoke.
-- **CLI and LSP:** Added the private repository bootstrap and Phase 0 engineering policy.
-- **CLI and LSP:** Added strict project configuration, portable path-safety checks, stable
+- Added the private repository bootstrap and Phase 0 engineering policy.
+- Added strict project configuration, portable path-safety checks, stable
   diagnostics, JSON-compatible data values, owned domain models, and JSON
   report schema v1.
-- **CLI and LSP:** Added deterministic source discovery, strict file classification, built-in
+- Added deterministic source discovery, strict file classification, built-in
   ignores, symlink rejection, exact output mapping, and collision planning.
-- **CLI and LSP:** Added strict page/layout frontmatter, JSON/YAML data loading, recursive data
+- Added strict page/layout frontmatter, JSON/YAML data loading, recursive data
   namespaces and merging, immutable content snapshots, and JSON copy plans.
-- **CLI and LSP:** Added automatic Go template registration, partial dependency validation,
+- Added automatic Go template registration, partial dependency validation,
   immutable registry metadata, and per-page layout selection.
-- **CLI:** Added immutable rendering contexts, strict template execution, contextual
+- Added immutable rendering contexts, strict template execution, contextual
   escaping, `has` and `get`, trusted page-to-layout insertion, and in-memory
   generated-page artifacts.
-- **CLI:** Added exact page matching, reproducible UTC build-date formatting, and
+- Added exact page matching, reproducible UTC build-date formatting, and
   executable native Go template migration examples.
-- **CLI:** Added BCP 47 language resolution, reciprocal translation groups, strict
+- Added BCP 47 language resolution, reciprocal translation groups, strict
   translation fallback, and CLDR cardinal plural helpers.
-- **CLI:** Added scoped final-HTML validation, complete in-memory dry runs, deterministic
+- Added scoped final-HTML validation, complete in-memory dry runs, deterministic
   schema-v1 build reports, and explicit report writing after failed builds.
-- **CLI:** Added byte-exact pass-through copying, verified complete-tree staging,
+- Added byte-exact pass-through copying, verified complete-tree staging,
   backup-first output promotion, rollback, and non-dry build reporting.
-- **CLI:** Added typed synchronous build progress events and serialized staged-file
+- Added typed synchronous build progress events and serialized staged-file
   notifications without changing parallel worker output.
-- **CLI:** Added compile-time Free capability metadata, strict manifest-to-registration
+- Added compile-time Free capability metadata, strict manifest-to-registration
   generation, native resource embedding, traversal-resistant scaffold writes,
   and CLI golden, subprocess, and binary-selection coverage.
-- **CLI:** Added a build-tagged application runtime boundary, indexed concurrent page
+- Added a build-tagged application runtime boundary, indexed concurrent page
   jobs with parallel validation, direct Free-to-Pro registration generation,
   confined development serving, response-only EventSource injection, and
   native watcher lifecycle coverage.
-- **CLI and LSP:** Added a repository policy check for name-led Go documentation on every owned
+- Added a repository policy check for name-led Go documentation on every owned
   named function, method, and reusable test helper.
-- **CLI:** Added separate native/WASI process adapters, target-filtered Pro registration,
+- Added separate native/WASI process adapters, target-filtered Pro registration,
   a fixed-root Node preview1 host, and executable product WASI acceptance.
-- **CLI:** Added recursive edition inheritance and dependency resolution, conflict and
+- Added recursive edition inheritance and dependency resolution, conflict and
   target-exclusion checks, effective manifest hashes, and general target-aware
   registration generation.
-- **CLI:** Added deterministic seven-target local release construction with executable
+- Added deterministic seven-target local release construction with executable
   inspection, archives, checksums, canonical metadata, SPDX SBOM, dependency
   notices, changelog extraction, exact-tree verification, reproducibility
   coverage, and native/WASI full-demo acceptance.
-- **CLI:** Added the pure-Go Goldmark Markdown compiler, authored-source diagnostic
+- Added the pure-Go Goldmark Markdown compiler, authored-source diagnostic
   mapping, request-local fragment IDs, dependency policy evidence, and native,
   Pro, race, and WASI coverage.
-- **CLI:** Added stable Vite manifest adapters, immutable asset snapshots, strict Vite
+- Added stable Vite manifest adapters, immutable asset snapshots, strict Vite
   config/path diagnostics, target-filtered Free WASI registration, and a locked
   latest-Vite compatibility fixture.
+- Replaced checked-in version-specific release-note files with GitHub-generated
+  release descriptions while retaining the package changelog as the maintained
+  migration history.
+
+### LSP
+
+#### Public changes
+
+- Added conservative call-site context inference for standalone partials in
+  the language server. Completion, hover, unique-source definitions, and
+  definite saved direct-path diagnostics now work through selected page and
+  layout calls that explicitly forward unchanged dot, including transitive and
+  compatible multi-page calls. Replaced-dot, changed-dot, unreachable, and
+  mixed call sites remain suppressed.
+- Started the Go implementation with dependency and cross-target evidence.
+
+#### Internal changes
+
+- Added the private repository bootstrap and Phase 0 engineering policy.
+- Added strict project configuration, portable path-safety checks, stable
+  diagnostics, JSON-compatible data values, owned domain models, and JSON
+  report schema v1.
+- Added deterministic source discovery, strict file classification, built-in
+  ignores, symlink rejection, exact output mapping, and collision planning.
+- Added strict page/layout frontmatter, JSON/YAML data loading, recursive data
+  namespaces and merging, immutable content snapshots, and JSON copy plans.
+- Added automatic Go template registration, partial dependency validation,
+  immutable registry metadata, and per-page layout selection.
+- Added a repository policy check for name-led Go documentation on every owned
+  named function, method, and reusable test helper.
+- Replaced checked-in version-specific release-note files with GitHub-generated
+  release descriptions while retaining the package changelog as the maintained
+  migration history.
 
 ## 0.3.3
 

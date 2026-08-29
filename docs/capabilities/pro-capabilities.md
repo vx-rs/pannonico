@@ -54,12 +54,12 @@ Free, Pro WASI, and watch do not fetch remote data. The exact policy is in
 
 ## Shared native parallel page work
 
-`--jobs COUNT` bounds only independent per-page rendering, optional HTML
-transformation, and final validation. The limit cannot exceed the host's
-logical CPU count. Native Free and Pro expose the same page-worker default,
-maximum, scheduler, and command-line control. Discovery, content and template
-preflight, result reduction, and output planning remain serial. Shared
-complete-tree publication separately
+`--jobs COUNT` bounds independent content-source loading, per-page rendering,
+optional HTML transformation, and final validation. The limit cannot exceed
+the host's logical CPU count. Native Free and Pro expose the same page-worker
+default, maximum, scheduler, and command-line control. Discovery, content
+namespace assembly, template preflight, result reduction, and output planning
+remain serial. Shared complete-tree publication separately
 uses at most thirty-two native staging workers per available Go execution thread,
 bounded by artifact count. Pro has no additional edition ceiling, while the
 shared positive `--max-output-workers` flag can lower the pool for one build or

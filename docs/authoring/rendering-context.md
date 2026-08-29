@@ -154,9 +154,10 @@ source identity, output identity, and HTML bytes. It may retain successful
 artifacts while reporting failures from other pages, but any error prevents a
 non-dry build from entering the output-staging phase.
 
-Native Free and Pro may schedule rendering, transformation, and validation
-concurrently into preassigned result slots. They use the same bounded worker
-default, maximum, and `--jobs` control. Discovery, shared preflight snapshots,
-diagnostic reduction, and output promotion remain serial, so the selected
-worker count does not alter output bytes or diagnostic order. Both WASI
-editions remain serial.
+Native Free and Pro may schedule confined content-source loading, rendering,
+transformation, and validation concurrently into preassigned result slots.
+They use the same bounded worker default, maximum, and `--jobs` control.
+Discovery, namespace assembly, shared preflight snapshots, diagnostic
+reduction, and output promotion remain serial, so the selected worker count
+does not alter output bytes or diagnostic order. Exported content loading and
+both WASI editions remain serial.

@@ -38,9 +38,10 @@ The standard Free product selects the Free runtime at compile time.
 
 Free native includes the core build, scaffold, manual, localization, Markdown,
 validation, sitemap generation, file routing, image optimization, atomic
-output, parallel rendering, Vite manifest, and managed Vite process
-capabilities. Its page-worker default is the smaller of sixteen and the host's
-logical CPU count; `--jobs` may select from one through that logical-CPU count.
+output, parallel content preparation and rendering, Vite manifest, and managed
+Vite process capabilities. Its page-worker default is the smaller of sixteen
+and the host's logical CPU count; `--jobs` may select from one through that
+logical-CPU count.
 Free WASI declares the same product surface without `parallel-rendering` or
 `vite-process`. It remains serial, can consume an existing Vite manifest, and
 cannot execute Node or start Vite. Free and Pro use the same native
@@ -68,7 +69,7 @@ Pro WASI retains CSS inlining, Rich Markdown, both pure HTML transformations,
 and `--jobs 1` but
 omits native process, server, live-reload, parallel, remote-data, and watch
 capabilities. A Pro WASI request for `--jobs` greater than one fails with status
-`4` because parallel rendering is unavailable on that target. Both Pro targets
+`4` because parallel page work is unavailable on that target. Both Pro targets
 compile the same Rich Markdown plugin set, but base Markdown remains the
 default until project configuration or page frontmatter explicitly requests a
 Rich Markdown feature. Pro has no additional publication-worker ceiling beyond
