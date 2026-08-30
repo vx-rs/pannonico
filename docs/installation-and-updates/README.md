@@ -40,8 +40,8 @@ are Release assets only; they are not stored in the Git repository or Git LFS.
 
 Install the Pannonico editor extension from the
 [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=vx-rs.pannonico),
-or search for `vx-rs.pannonico` in the VS Code Extensions view. VS Code installs
-the required WASM WASI Core extension as a dependency.
+or search for `vx-rs.pannonico` in the VS Code Extensions view. The extension
+downloads and verifies the matching native Pannonico LSP on first use.
 
 Pannonico never replaces itself in the background. Update the CLI by running the
 npm installation command again. Update the extension through VS Code.
