@@ -17,16 +17,6 @@ track's version subsection.
   package-manager tracks consume the already-closed CLI artifacts without
   rebuilding them.
 
-### LSP
-
-#### Public changes
-
-- Added native macOS, Linux, and Windows LSP executables for AMD64 and ARM64.
-  The native executables and existing WASI module now ship together in one
-  closed release manifest from the same source revision.
-- Made the matching native executable the desktop runtime for VS Code, Zed,
-  Neovim, and JetBrains. WASI remains a sibling release target.
-
 ## 0.4.0
 
 ### CLI

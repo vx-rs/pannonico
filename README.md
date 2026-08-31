@@ -12,7 +12,7 @@ frontmatter, YAML/JSON data, localization, navigation, deterministic sitemaps,
 HTML validation, image optimization, and atomic site output. It supports
 zero-configuration sites, explicit configuration, Vite production assets, a
 WASI fallback, MCP tools, and editor integration through the public Pannonico
-language server and plugins for VS Code, Zed, Neovim, and supported JetBrains
+language server and plugins for VS Code, Neovim, and supported JetBrains
 IDEs.
 
 Pannonico includes bounded concurrency controls and benchmark infrastructure.
@@ -72,14 +72,14 @@ Both commands write the same manual below `<root>/documentation/`.
 ## Editor support
 
 - Install [Pannonico for VS Code](https://marketplace.visualstudio.com/items?itemName=vx-rs.pannonico).
-- Install the public `pannonico-lsp` extension from Zed after its registry
-  listing is announced.
-- Install `vx-rs/pannonico-neovim` with a Neovim plugin manager. Neovim 0.12 or
-  newer is required.
+- Install `vx-rs/pannonico-neovim` with a Neovim plugin manager. Neovim 0.12.x
+  is required.
 - Install `Pannonico` from JetBrains Marketplace after approval. The plugin
-  targets the JetBrains 2026.2 (`262.*`) generation. Free unified IntelliJ IDEA
-  and PyCharm can run it; actual product support is limited to IDEs listed in
-  the plugin documentation after Plugin Verifier and installed-IDE checks.
+  targets the JetBrains 2026.2 (`262.*`) generation through platform LSP APIs
+  that do not require IntelliJ IDEA Ultimate. Unified IntelliJ IDEA, whose free
+  tier includes core HTML support, is the automated representative for Plugin
+  Verifier and installed-IDE acceptance; individual JetBrains product licensing
+  still applies.
 - Read the public [language-server integration contract](https://github.com/vx-rs/pannonico-lsp).
 
 ## Compatibility
