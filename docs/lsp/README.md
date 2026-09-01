@@ -1,9 +1,9 @@
 # Language-server integration
 
 Pannonico's editor features use the edition-neutral Go/WASI language server.
-The VS Code extension is designed to download one pinned release and verify its
-declared byte size, SHA-256 checksum, and WASM identity before starting a
-project-scoped session. The extension never needs access to Pannonico's private
+Editor plugins download one pinned module and verify its declared byte size,
+SHA-256 checksum, and WASM identity before starting a project-scoped session.
+A plugin never needs access to Pannonico's private
 source repository. Install the public extension from the
 [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=vx-rs.pannonico).
 Its pinned language-server bytes are available anonymously from immutable
@@ -19,12 +19,11 @@ Read:
 
 ## Extension requirements and scope
 
-The extension requires VS Code 1.91 or newer, the WASM WASI Core extension, and
-a trusted file-backed local or Remote-WSL workspace. It discovers regular
+The current extension requires VS Code 1.100 or newer and a trusted file-backed
+local, Remote-WSL, Remote-SSH, or Dev Container workspace. It discovers regular
 `pannonico.yaml` and `.pannonico` project markers; a markerless workspace can be
-selected manually. Remote-SSH, Dev Containers, Codespaces, other remote
-providers, Restricted Mode, virtual workspaces, and VS Code for the Web are not
-supported.
+selected manually. Codespaces, other remote providers, Restricted Mode,
+virtual workspaces, and VS Code for the Web are not supported.
 
 Each marked project receives an isolated language-server process. Sibling and
 nested projects use separate sessions, and the deepest marked root owns a file.
