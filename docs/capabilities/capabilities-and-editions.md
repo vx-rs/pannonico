@@ -42,6 +42,14 @@ output, parallel content preparation and rendering, Vite manifest, and managed
 Vite process capabilities. Its page-worker default is the smaller of sixteen
 and the host's logical CPU count; `--jobs` may select from one through that
 logical-CPU count.
+
+Image optimization includes a privacy property: when Pannonico selects a
+smaller re-encoded JPEG or PNG, the replacement carries decoded image samples
+but no source metadata. If the candidate is not smaller or a safety fallback
+applies, Pannonico keeps the original bytes and does not claim that the image
+was sanitized. See [Image optimization](../build-and-output/image-optimization.md)
+for the exact metadata categories and preservation routes.
+
 Free WASI declares the same product surface without `parallel-rendering` or
 `vite-process`. It remains serial, can consume an existing Vite manifest, and
 cannot execute Node or start Vite. Free and Pro use the same native

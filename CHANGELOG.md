@@ -12,10 +12,7 @@ track's version subsection.
 
 #### Public changes
 
-- Moved the CLI to the shared 0.5 release line and added exact candidate
-  projections for Homebrew, WinGet, and the Pannonico APT repository. The
-  package-manager tracks consume the already-closed CLI artifacts without
-  rebuilding them.
+- Moved the CLI to the shared 0.5 release line.
 
 ## 0.4.0
 

@@ -1,7 +1,15 @@
 # Installation and updates
 
-Pannonico requires Node.js 24 or newer. Install the current command-line release
-from npm:
+Pannonico 0.5 is not released yet. The source tree defines the candidate
+installation paths below, but a source file or candidate package is not proof
+that its public channel is available. Before installation, confirm that the
+selected destination lists the intended version. Keep the CLI, manifest, and
+runtime files on the same `0.5.x` version.
+
+## npm
+
+The npm launcher requires Node.js 24 or newer. After the matching npm release
+is published, install Pannonico with:
 
 ```text
 npm install --global pannonico@latest
@@ -14,37 +22,53 @@ pannonico --version
 pannonico capabilities
 ```
 
-The npm launcher verifies its selected native or WASI artifact against the
+The launcher verifies its selected native or WASI artifact against the
 packaged manifest before execution. It uses native code on a supported host and
 falls back to the bundled WASI module when a native package is unavailable.
 
-## Standalone CLI 0.3.0
+## Standalone CLI assets
 
-Pannonico Free 0.3.0 is also distributed as immutable GitHub Release assets.
-Download the manifest and exactly one runtime for the target host:
+Each released CLI version has one immutable GitHub Release containing
+`manifest.json`, native executables for the supported macOS, Linux, and Windows
+targets, and `pannonico.wasm`. Download the manifest and exactly one runtime
+from the same `v<version>` release.
 
-- [`manifest.json`](https://github.com/vx-rs/pannonico/releases/download/v0.3.0/manifest.json)
-- [`pannonico-darwin-arm64`](https://github.com/vx-rs/pannonico/releases/download/v0.3.0/pannonico-darwin-arm64)
-- [`pannonico-darwin-x64`](https://github.com/vx-rs/pannonico/releases/download/v0.3.0/pannonico-darwin-x64)
-- [`pannonico-linux-arm64`](https://github.com/vx-rs/pannonico/releases/download/v0.3.0/pannonico-linux-arm64)
-- [`pannonico-linux-x64`](https://github.com/vx-rs/pannonico/releases/download/v0.3.0/pannonico-linux-x64)
-- [`pannonico-win32-arm64.exe`](https://github.com/vx-rs/pannonico/releases/download/v0.3.0/pannonico-win32-arm64.exe)
-- [`pannonico-win32-x64.exe`](https://github.com/vx-rs/pannonico/releases/download/v0.3.0/pannonico-win32-x64.exe)
-- [`pannonico.wasm`](https://github.com/vx-rs/pannonico/releases/download/v0.3.0/pannonico.wasm)
-
-Require the manifest's Free edition, version `0.3.0`, full source revision, and
+Require the manifest's Free edition, exact version, full source revision, and
 matching target record. Before execution, verify the downloaded filename, byte
-size, lowercase SHA-256 digest, and executable mode against that record. Keep
-the manifest and runtime from the same immutable release. The standalone files
-are Release assets only; they are not stored in the Git repository or Git LFS.
+size, lowercase SHA-256 digest, and executable mode against that record. The
+standalone files are release assets only; they are not stored in the Git
+repository or Git LFS.
 
-Install the Pannonico editor extension from the
-[Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=vx-rs.pannonico),
-or search for `vx-rs.pannonico` in the VS Code Extensions view. The extension
-downloads and verifies the exact pinned Pannonico LSP WASM on first use.
+## Editor integrations
 
-Pannonico never replaces itself in the background. Update the CLI by running the
-npm installation command again. Update the extension through VS Code.
+Pannonico editor integrations have independent release tracks and select an
+exact Pannonico LSP release:
+
+- VS Code 1.100 or newer uses the `vx-rs.pannonico` extension in trusted,
+  file-backed local, Remote-WSL, Remote-SSH, and Dev Container workspaces.
+- Neovim 0.12.x uses the `vx-rs/pannonico-neovim` package and Neovim's built-in
+  package and LSP support.
+- JetBrains IDEs on IntelliJ Platform 2026.2, build branch 262, use the
+  Pannonico plugin for that platform generation.
+
+Install an editor adapter only after its Marketplace, GitHub Release, or tagged
+repository destination lists the selected version. See
+[language-server integration](../lsp/README.md) for setup and compatibility
+details.
+
+## Updating
+
+Pannonico never replaces itself in the background. Update through the same
+channel used for installation, then run:
+
+```text
+pannonico --version
+pannonico capabilities
+```
+
+Update editor adapters through their owning Marketplace or package manager.
+Each adapter release continues to use its reviewed, pinned LSP and runtime
+identity; do not substitute a mutable `latest` download.
 
 ## Migrations
 

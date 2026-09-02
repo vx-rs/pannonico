@@ -195,6 +195,30 @@ and suffixes duplicates starting with `-2`. Raw HTML and Go actions do not
 contribute to the ID; inline code does. Anchors do not add permalinks or
 `tabindex` attributes.
 
+Markdown assigns heading IDs before Go template execution. A heading inside a
+Go `range` therefore repeats its already assigned ID even when an action prints
+different visible text:
+
+```markdown
+{{range .page.versions}}
+## Version {{.version}}
+{{end}}
+```
+
+With anchors enabled, every executed copy has `id="version"`, and strict final
+HTML validation reports the duplicate. For repeated data, author ordinary HTML
+with a unique, reviewed slug or restructure the page so Markdown emits the
+heading once:
+
+```html
+{{range .page.versions}}
+<h2 id="version-{{.slug}}">Version {{.version}}</h2>
+{{end}}
+```
+
+The project owns the uniqueness and URL safety of `.slug`; Pannonico still
+checks the assembled document for duplicate IDs.
+
 Named footnote definitions may appear after their references. Inline
 footnotes use `^[content]`, which takes priority over superscript parsing.
 Their contents support ordinary inline Markdown, balanced link-label brackets,

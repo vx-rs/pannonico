@@ -32,31 +32,6 @@ Matching standalone native and WASI binaries are attached only to versioned
 [GitHub Releases](https://github.com/vx-rs/pannonico/releases). Binaries are not
 committed to this Git repository and do not use Git LFS.
 
-The following package-manager channels are planned but are not public until
-their repository or catalog readback succeeds:
-
-- Homebrew tap: `brew install --cask vx-rs/pannonico/pannonico`
-- WinGet: `winget install --exact --id VxRs.Pannonico`
-- Pannonico APT origin: `https://apt.pannonico.dev/`
-
-After the APT origin is announced as available, configure repository-scoped
-trust without `apt-key`:
-
-```sh
-curl -fsSL https://apt.pannonico.dev/pannonico-archive-key.gpg |
-  sudo tee /usr/share/keyrings/pannonico-archive-key.gpg >/dev/null
-sudo tee /etc/apt/sources.list.d/pannonico.sources >/dev/null <<'EOF'
-Types: deb
-URIs: https://apt.pannonico.dev/
-Suites: stable
-Components: main
-Architectures: amd64 arm64
-Signed-By: /usr/share/keyrings/pannonico-archive-key.gpg
-EOF
-sudo apt update
-sudo apt install pannonico
-```
-
 ## Documentation
 
 Browse the complete [user manual](docs/README.md). To copy the manual matching
