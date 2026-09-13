@@ -15,6 +15,46 @@ Read:
    generations, and lifecycle control.
 3. The release contract when diagnosing acquisition or cache failures.
 
+## Completion and explanations
+
+The language server completes direct data/navigation paths and reference strings:
+
+- `template "shell/header"`: discovered partial names and directories, without
+  the `.html` extension. Name completion also works without a dot argument.
+- Page frontmatter `layout` and configuration `templates.defaultLayout`: layout
+  names and `none`, in plain or quoted YAML scalars.
+- `get` and `has`: dot-separated keys in a known object. `index` completes exact
+  keys, including keys containing literal dots.
+- `pageIs .pannonico "manual/topic"`: page paths and basenames. A basename can
+  match pages in several directories.
+- `t dictionary "sr-Latn"`: fallback languages found in the known dictionary.
+- `date "YYYY-MM-DD"`: the supported `YYYY`, `MM`, and `DD` tokens.
+
+Completion starts at the opening quote and continues within each path segment.
+Hover explains known references and their source files without displaying data
+values. Arbitrary content strings and unresolved variables have no reference
+suggestions. Object-key assistance requires a known dot context; partial and
+layout names are independent of that context.
+
+Markdown inline code, fenced code, and indented code are documentation rather
+than live template source. The language server does not offer completion,
+hover, definitions, or template diagnostics inside them. It applies the same
+rule to the inner source of an HTML element marked with
+`pannonico-verbatim`. Language features resume immediately after either
+literal region.
+
+## Diagnostics
+
+Editor underlines and diagnostic popups show configuration, data, frontmatter,
+navigation, and template errors detected while loading the project. Findings
+remain visible when a load fails and clear after the source is repaired and
+saved. YAML and JSON buffers are synchronized alongside HTML and Markdown.
+Unsaved text suppresses saved-file coordinates that no longer match it.
+
+The editor also checks definite missing data/navigation paths, partials, and
+layouts. It does not render the site, fetch remote data, or run Vite. Use a CLI
+or MCP build to check rendered HTML and errors that depend on execution.
+
 ## VS Code
 
 The current adapter requires VS Code 1.100 or newer and a trusted file-backed

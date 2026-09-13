@@ -38,6 +38,10 @@ Actions inside inline, fenced, and indented code are rendered literally:
 ```
 ````
 
+The language server follows the same boundary. Code examples do not receive
+template completion, hover, definitions, or diagnostics; live actions before
+and after them retain normal editor support.
+
 Authored Markdown pages may contain raw HTML. That is a trusted project-source
 boundary, equivalent to authored HTML templates; values later inserted by Go
 templates are still contextually escaped.

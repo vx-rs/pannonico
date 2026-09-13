@@ -6,6 +6,20 @@ Every entry in this section starts with **CLI**, **LSP**, or **CLI and LSP**.
 An independent release moves only its selected track's entries into that
 track's version subsection.
 
+## 0.5.1
+
+### CLI
+
+- Added `pannonico-verbatim` wrappers whose inner source stays outside template
+  execution, Pannonico directives, HTML transforms, and HTML validation, then
+  appears literally in final output.
+
+### LSP
+
+- Ignored template-like source in CommonMark code and `pannonico-verbatim`
+  wrappers while retaining completion, hover, definitions, and diagnostics in
+  live source.
+
 ## 0.5.0
 
 ### CLI
