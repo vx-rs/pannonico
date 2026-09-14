@@ -6,19 +6,28 @@ Every entry in this section starts with **CLI**, **LSP**, or **CLI and LSP**.
 An independent release moves only its selected track's entries into that
 track's version subsection.
 
-## 0.5.1
+## 0.6.0
 
 ### CLI
 
 - Added `pannonico-verbatim` wrappers whose inner source stays outside template
   execution, Pannonico directives, HTML transforms, and HTML validation, then
   appears literally in final output.
+- Updated generated Vite projects and the maintained compatibility fixture to
+  Vite 8.3.0.
+- Built the release with Go 1.27.1 and updated the maintained toolchain pin.
 
 ### LSP
 
 - Ignored template-like source in CommonMark code and `pannonico-verbatim`
   wrappers while retaining completion, hover, definitions, and diagnostics in
   live source.
+- Added completion and hover for partial names, layouts, object keys, page
+  names, translation fallback languages, and date format tokens.
+- Added compiler diagnostics for configuration, data, frontmatter, and
+  template syntax, including projects that cannot finish loading, with
+  synchronized YAML and JSON source inputs.
+- Built the release with Go 1.27.1 and updated the maintained toolchain pin.
 
 ## 0.5.0
 

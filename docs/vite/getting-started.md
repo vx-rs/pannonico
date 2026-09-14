@@ -92,7 +92,7 @@ npm init --yes
 npm install --save-dev vite@8
 ```
 
-The site accepts Vite 8 releases. Vite `8.2.2` is the current concrete release
+The site accepts Vite 8 releases. Vite `8.3.0` is the current concrete release
 covered by the repository's locked real-build fixture. Check the compatibility
 table in [`vite-integration.md`](integration.md) before changing the major.
 
