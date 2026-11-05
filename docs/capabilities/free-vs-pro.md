@@ -33,6 +33,7 @@ The governing rule is:
 | Rendering | Parallel page rendering | Yes | Yes | Both native editions use the same bounded, configurable page-worker policy. WASI remains serial. Representative public benchmark results have not yet been published. |
 | Output | HTML generation | Yes | Yes | Free output is complete and production-ready. |
 | Output | Deterministic sitemap generation | Yes | Yes | Both editions and native/WASI targets publish the same `sitemap.xml` for the same rendered routes. |
+| Output | Opt-in Signed Resources | No | Yes | Pro signs hashes of finished files with Ed25519; Free rejects an enabled request. Both Pro targets can sign when keys are readable. |
 | Output | HTML validation | Yes | Yes | Validation is a correctness feature. |
 | Output | HTML beautification | No | Yes | Optional readable-output transformation and secondary Pro value. |
 | Output | HTML minification | No | Yes | Optional production transformation. |
@@ -71,6 +72,7 @@ The governing rule is:
 - HTML minification
 - HTML beautification
 - CSS inlining
+- Signed Resources
 
 ## Target notes
 

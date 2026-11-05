@@ -23,6 +23,12 @@ site:
 sitemap:
   enabled: true
 
+# Experimental Pro signing; requires further testing.
+signing:
+  enabled: true
+  privateKey: ~/.config/pannonico/keys/example.com
+  publicKey: ~/.config/pannonico/keys/example.com.pub
+
 paths:
   pages: pages
   layouts: layouts
@@ -81,6 +87,7 @@ Every section except `version` is optional. The zero-config defaults are:
 | output             | `dist/`                                                     |
 | site URL           | unset                                                       |
 | sitemap            | enabled; skipped with a warning while the site URL is unset |
+| signing            | disabled                                                    |
 | default layout     | `default`                                                   |
 | default language   | unset                                                       |
 | languages file     | `data/languages.yaml` when the file exists                  |
@@ -131,6 +138,21 @@ overrides it after Pro authorizes the request. Free parses valid values so the
 option is stable, then returns `CAPABILITY_UNSUPPORTED` with status `4` for an
 explicit request. Page frontmatter can make its own later request and selection.
 See [`markdown.md`](markdown.md) for syntax and scope.
+
+Asset signing (Signed Resources) is experimental and requires further testing.
+
+`signing.enabled: true` requests the Pro `signed-resources` capability. Both
+`signing.privateKey` and `signing.publicKey` are required then. They name
+dedicated, unencrypted OpenSSH Ed25519 files; key material is never placed in
+YAML or reports. Relative key paths use the selected config file's directory.
+Absolute paths and leading `~/` are also accepted, so keys can live outside
+the project. A signed build rejects a private key selected as a published page or copied site
+resource, including a hard-link alias. A disabled signing block does not open
+key files. Keep both keys outside a replacement output directory; a signed
+build rejects placements that would be erased when replacing that tree. Dry
+runs check
+configuration and capability but do not read keys or create signing files.
+See [Signed Resources v1](../reference/signed-resources-v1.md).
 
 ## Resolution and overrides
 

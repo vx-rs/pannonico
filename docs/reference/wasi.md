@@ -23,6 +23,12 @@ unavailable parallel rendering and exits with capability status `4` before
 project work. Watch, the development server, live reload, remote HTTPS data,
 and native Integrated development mode are unavailable.
 
+Pro WASI can sign a site when its OpenSSH key files are visible inside the
+existing preopen. Relative signing paths resolve from the selected config file;
+paths outside the preopen cannot be read by the WASI process. No host key agent
+or passphrase prompt is involved. The `signing-dns` command uses those same
+readable files.
+
 WASI can load `--data` only when the selected directory remains inside its one
 preopen. Neither edition exposes `--data-url` on WASI. Configured `data.urls`
 returns capability status `4` before rendering.

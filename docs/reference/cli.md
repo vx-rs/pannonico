@@ -12,6 +12,7 @@ pannonico scaffold [flags] [root]
 pannonico manual [--eject [root]]
 pannonico mcp [root]
 pannonico capabilities
+pannonico signing-dns [--config PATH] [root]  # Pro only
 pannonico --help
 pannonico --version
 ```
@@ -28,6 +29,13 @@ is blue on a color-enabled stdout terminal, plain when color is suppressed or
 output is redirected, and absent when the release configures an empty value.
 
 A native Pro binary also provides `pannonico watch [flags] [root]`.
+Asset signing (Signed Resources) is experimental and requires further testing.
+
+Both Pro targets provide `pannonico signing-dns [--config PATH] [root]`.
+It validates enabled signing and the configured OpenSSH Ed25519 key pair,
+requires a DNS hostname in `site.url`, and prints one copyable `_pannonico`
+TXT line. It does not modify DNS. Free returns capability status `4`.
+See [Signed Resources v1](signed-resources-v1.md).
 
 ## MCP
 
@@ -255,8 +263,10 @@ change observed while a build runs causes another serialized build.
 
 The server begins after the first successful promotion. A later failed build
 does not replace the output, change the served root, or trigger reload. The
-live-reload client is inserted only into served HTML responses; generated files
-are unchanged. `Ctrl-C` cancels watching and waits for server shutdown.
+live-reload client is inserted only into unsigned HTML responses; generated
+files are unchanged. Signed builds are automatically rebuilt and re-signed,
+and their previews require a manual browser refresh to preserve signed bytes.
+See [signed watch previews](signed-resources-v1.md#signed-watch-previews). `Ctrl-C` cancels watching and waits for server shutdown.
 
 With Vite enabled, native builds may run the configured structured
 `buildCommand` before manifest loading. Dry run never executes it. A WASI

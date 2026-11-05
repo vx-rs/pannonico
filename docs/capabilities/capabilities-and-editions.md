@@ -70,11 +70,12 @@ selected stylesheet, removes the directive, and reports one warning. See
 The Pro product selects the Pro runtime at compile time.
 
 Pro native adds explicit Rich Markdown, HTML beautification, HTML minification,
-generic CSS inlining, bounded HTTPS data, watch, development serving, and live
-reload. It uses the same bounded native page scheduler and managed Vite process
-behavior as Free native.
-Pro WASI retains CSS inlining, Rich Markdown, both pure HTML transformations,
-and `--jobs 1` but
+generic CSS inlining, Signed Resources, bounded HTTPS data, watch,
+development serving, and live reload. It uses the same bounded native page
+scheduler and managed Vite process behavior as Free native.
+Pro WASI retains CSS inlining, Rich Markdown, Signed Resources when both key
+files are readable through its preopen, both pure HTML transformations, and
+`--jobs 1` but
 omits native process, server, live-reload, parallel, remote-data, and watch
 capabilities. A Pro WASI request for `--jobs` greater than one fails with status
 `4` because parallel page work is unavailable on that target. Both Pro targets

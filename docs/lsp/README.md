@@ -86,18 +86,19 @@ Pannonico and WASM WASI Core in the workspace extension group.
 
 ## Neovim
 
-The current adapter supports Neovim 0.12.x only and uses Neovim's built-in
-package manager and LSP lifecycle. It does not depend on `nvim-lspconfig` or
-Mason. Git and Neovim 0.12.5 are required by the current 0.5 candidate.
+The 0.7.1 adapter keeps Neovim 0.12 as its minimum and accepts newer 0.x minor
+and patch hosts on a best-effort basis. It uses Neovim's built-in package
+manager and LSP lifecycle without `nvim-lspconfig` or Mason. Installation
+examples and maintained acceptance use Neovim 0.12.5; that is not a ceiling.
 
-After a matching immutable `0.5.x` tag is published, add the adapter in
+Install a matching immutable `0.7.x` release, then add the adapter in
 `init.lua`:
 
 ```lua
 vim.pack.add({
   {
     src = 'https://github.com/vx-rs/pannonico-neovim',
-    version = vim.version.range('0.5'),
+    version = vim.version.range('0.7'),
   },
 })
 
@@ -108,19 +109,23 @@ Restart Neovim after the initial install. Open an HTML or Markdown file below
 a root containing `pannonico.yaml` or `.pannonico`. Use `:PannonicoStatus` and
 `:PannonicoRestart` for lifecycle diagnosis.
 
-The current adapter selects `pannonico-lsp.wasm` 0.5.0 and official Wasmtime
+The current adapter selects `pannonico-lsp.wasm` 0.7.0 and official Wasmtime
 48.0.1. It downloads and verifies both when matching local overrides are not
 configured. The adapter supports the host targets declared by its pinned
 runtime manifest; it does not resolve a mutable Wasmtime release.
 
 ## JetBrains IDEs
 
-The current plugin supports IntelliJ Platform 2026.2, build branch 262, only:
+The 0.7.1 plugin keeps IntelliJ Platform 2026.2, build branch 262, as its
+minimum and has no upper host-version bound:
 
 ```text
 sinceBuild = 262
-untilBuild = 262.*
 ```
+
+Newer minor, patch and major IDE hosts are eligible on a best-effort basis.
+The checked-in Gradle configuration clears its default upper bound on every
+build; no release-time override is needed.
 
 The plugin starts its exact pinned `pannonico-lsp.wasm` through verified
 Wasmtime 48.0.1 for each root containing `pannonico.yaml` or `.pannonico`.

@@ -18,8 +18,9 @@ frontend commands.
 ## Complete output plan
 
 Generated pages, ordinary copied files, Vite output artifacts, and generated
-site files form one deterministic plan. `sitemap.xml` is currently the only
-generated site-file kind. The Vite manifest is metadata and is not published.
+site files form one deterministic plan. `sitemap.xml` is generated when
+configured; enabled Pro signing also reserves `pannonico-key.pub` and
+`pannonico-integrity.json`. The Vite manifest is metadata and is not published.
 Targets must be non-empty, clean slash-separated relative paths. The output
 planner rejects:
 
@@ -57,6 +58,20 @@ directories continue to use the complete-tree staging and atomic promotion
 described below. See
 [`minimal-builds-and-data.md`](minimal-builds-and-data.md) for destination
 prompting and eligibility.
+
+## Signed output
+
+When Pro signing is enabled, Pannonico writes the ordinary finished resources
+into the same private stage, adds the normalized fallback public key, hashes
+the staged resource bytes, then signs and writes `pannonico-integrity.json`
+last. The manifest is excluded from its own hash list. Both metadata files go
+through the existing stage verification and publication path. A collision with
+either reserved filename, or a planned publication of the signing private key,
+fails before publication. Keys inside a replacement output directory are
+rejected because replacing the tree would remove them. A JSON report path that
+would overlap signed output is rejected rather than changing signed bytes.
+The [v1 protocol](../reference/signed-resources-v1.md) defines the exact
+manifest and deployment paths.
 
 ## Pass-through bytes
 

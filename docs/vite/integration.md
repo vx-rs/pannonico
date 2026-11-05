@@ -327,7 +327,10 @@ configured, or waits for an
 external server. It polls `<devServer>/@vite/client` before the first site build.
 Vite owns asset HMR. Pannonico watches only its config, pages, layouts, partials,
 data, and a configured standalone languages file. Asset edits do not cause a
-Pannonico rebuild. Content edits rebuild the site and trigger full-page reload.
+Pannonico rebuild. Content edits rebuild the site and trigger full-page reload
+for unsigned previews. Signed previews rebuild and re-sign automatically but
+require a manual browser refresh; see
+[signed watch previews](../reference/signed-resources-v1.md#signed-watch-previews).
 
 When conventional `pages/` is absent, watch observes only immediate root
 `.html`, `.md`, and `.markdown` candidates plus creation of `pages/`; it does

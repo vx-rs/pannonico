@@ -42,6 +42,19 @@ tokenization, and renderer allocations for that Markdown selection. Chroma is
 statically linked only into Pro, so disabling it per project or page does not
 remove Pro artifact size or package initialization.
 
+## Signed Resources
+
+Asset signing (Signed Resources) is experimental and requires further testing.
+
+Native and WASI Pro advertise `signed-resources` version 1. An explicit
+`signing.enabled: true` request validates a dedicated OpenSSH Ed25519 key pair
+before a publishing build, then hashes finished staged resources and writes one
+signed manifest. A dry run checks capability and renders the manifest location
+without opening keys. Free recognizes the config fields but returns
+`CAPABILITY_UNSUPPORTED` for enabled signing. The `signing-dns` helper reads the
+same pair and prints the DNS TXT record; it does not publish DNS.
+See [Signed Resources v1](../reference/signed-resources-v1.md).
+
 ## Remote data
 
 Native Pro advertises `remote-data` and accepts one HTTPS JSON/YAML source per
@@ -133,9 +146,12 @@ active output, Pannonico-owned staging and backup directories, and the selected
 JSON report. It waits for a quiet coalescing window and runs one build at a time.
 
 After a successful promotion, the server confines reads beneath that output
-with `os.Root`. Failed rebuilds leave the previous tree served. HTML responses
+with `os.Root`. Failed rebuilds leave the previous tree served. Unsigned HTML responses
 receive a small EventSource client, while files on disk remain byte-for-byte
 build artifacts. Reload is broadcast only after a successful later promotion.
+Signed builds are automatically rebuilt and re-signed; their exact-byte
+previews require a manual browser refresh. See
+[signed watch previews](../reference/signed-resources-v1.md#signed-watch-previews).
 
 The default listener is loopback. `--open` uses the platform browser opener
 only after the server starts. `Ctrl-C` cancels the watcher and waits for HTTP

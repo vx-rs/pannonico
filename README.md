@@ -47,11 +47,11 @@ Both commands write the same manual below `<root>/documentation/`.
 ## Editor support
 
 - Install [Pannonico for VS Code](https://marketplace.visualstudio.com/items?itemName=vx-rs.pannonico).
-- Install `vx-rs/pannonico-neovim` with a Neovim plugin manager. Neovim 0.12.x
-  is required.
+- Install `vx-rs/pannonico-neovim` with a Neovim plugin manager. Neovim 0.12 or
+  newer within 0.x is required.
 - Install `Pannonico` from JetBrains Marketplace after approval. The plugin
-  targets the JetBrains 2026.2 (`262.*`) generation through platform LSP APIs
-  that do not require IntelliJ IDEA Ultimate. Unified IntelliJ IDEA, whose free
+  keeps JetBrains build 262 as its minimum without an upper bound and uses
+  platform LSP APIs that do not require IntelliJ IDEA Ultimate. Unified IntelliJ IDEA, whose free
   tier includes core HTML support, is the automated representative for Plugin
   Verifier and installed-IDE acceptance; individual JetBrains product licensing
   still applies.

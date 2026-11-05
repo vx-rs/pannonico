@@ -6,6 +6,30 @@ Every entry in this section starts with **CLI**, **LSP**, or **CLI and LSP**.
 An independent release moves only its selected track's entries into that
 track's version subsection.
 
+## 0.7.0
+
+### CLI
+
+- Added experimental, optional Pro signing of completed site resources and the
+  `signing-dns` command for printing the configured key's DNS TXT value.
+  Asset signing requires further testing. Preview responses preserve signed
+  HTML bytes.
+- Assemble render namespaces from the partial index without scanning
+  unrelated pages, preserving copied parse trees and request-local helpers.
+- Resolve npm bundled-WASI data and report paths from the caller's
+  directory and preserve `signing-dns` project-root handling.
+- Release MCP admission slots after whitespace-only input frames.
+- Allow APT stable indexes and signatures to advance while keeping
+  versioned packages and the archive key immutable.
+- Updated the CLI support note and linked to https://studenti.org.rs/.
+
+### LSP
+
+- Fixed WASI stdin handling so initialized sessions survive idle periods,
+  fragmented requests, and document close/reopen without `not pollable` or
+  subsequent `Stream is closed` failures. Preserved input ownership, EOF,
+  permanent errors, and timer progress on nonblocking hosts.
+
 ## 0.6.0
 
 ### CLI

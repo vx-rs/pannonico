@@ -13,7 +13,7 @@ a trailing newline and stable semantic field order.
   "success": true,
   "dryRun": true,
   "edition": "free",
-  "version": "0.0.0-dev",
+  "version": "1.2.3-dev",
   "target": "linux-amd64",
   "filesWritten": 0,
   "wouldBuildPages": 24,

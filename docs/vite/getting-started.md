@@ -410,7 +410,9 @@ The two processes handle different changes:
 - Vite handles CSS, SCSS, JavaScript, TypeScript, Vue, and imported assets. It
   sends asset updates through Vite HMR.
 - Pannonico handles pages, layouts, partials, data, and configuration. It
-  rebuilds the site and triggers a full-page reload.
+  rebuilds the site and triggers a full-page reload for unsigned previews.
+  Signed previews rebuild and re-sign automatically and need a manual browser
+  refresh; see [signed watch previews](../reference/signed-resources-v1.md#signed-watch-previews).
 
 Stopping `pannonico watch` also stops the Vite process that Pannonico started.
 

@@ -46,9 +46,9 @@ exact Pannonico LSP release:
 
 - VS Code 1.100 or newer uses the `vx-rs.pannonico` extension in trusted,
   file-backed local, Remote-WSL, Remote-SSH, and Dev Container workspaces.
-- Neovim 0.12.x uses the `vx-rs/pannonico-neovim` package and Neovim's built-in
+- Neovim 0.12 or newer within 0.x uses the `vx-rs/pannonico-neovim` package and Neovim's built-in
   package and LSP support.
-- JetBrains IDEs on IntelliJ Platform 2026.2, build branch 262, use the
+- JetBrains IDEs on IntelliJ Platform build 262 or newer, use the
   Pannonico plugin for that platform generation.
 
 Install an editor adapter only after its Marketplace, GitHub Release, or tagged

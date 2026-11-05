@@ -41,6 +41,7 @@ Rendering exposes these `.pannonico` fields:
 | `pagePath`     | Page path without the `.html` extension.                                                 |
 | `pageName`     | Final page-path component.                                                               |
 | `layout`       | Exact selected layout name, or null when disabled.                                       |
+| `integrityManifestURL` | Origin-relative manifest URL when signing is enabled, or null otherwise. |
 | `buildDate`    | Build-wide UTC `YYYY-MM-DD` value captured at build start, honoring `SOURCE_DATE_EPOCH`. |
 | `version`      | Pannonico version supplied by metadata.                                                  |
 | `edition`      | Compiled edition supplied by metadata.                                                   |
@@ -49,6 +50,13 @@ Rendering exposes these `.pannonico` fields:
 | `translations` | Ordered translation-link objects excluding the current page.                             |
 | `vite`         | Absent when disabled; otherwise the immutable production or development asset object.    |
 | `content`      | Absent during the page pass; trusted rendered page HTML during the layout pass.          |
+
+Use `{{with .pannonico.integrityManifestURL}}` when a shared layout should emit
+`<meta name="pannonico-integrity" content="{{.}}">` only for signed builds.
+The URL includes the path of `site.url`, so a site mounted at `/docs` emits
+`/docs/pannonico-integrity.json`. It is renderer-owned ordinary string data,
+not `.page` or `.local` content. See
+[Signed Resources v1](../reference/signed-resources-v1.md).
 
 The build target is not a template field. Callers cannot supply `content` to
 the context constructor.
