@@ -47,12 +47,13 @@ npm install --save-dev pannonico
 ```ts
 import { build } from 'pannonico'
 
-const result = await build({ root: './site', out: './dist' })
+const result = await build({ root: './site', out: './dist', minify: true })
 console.log(result.stdout)
 ```
 
 `build` runs the installed package's binary and returns `exitCode`, `signal`,
-`stdout`, and `stderr`. Use `dryRun: true` to validate without publishing output.
+`stdout`, and `stderr`. Use `beautify: true` for readable HTML or `minify: true`
+for compact output. Use `dryRun: true` to validate without publishing output.
 Failed commands reject with `PannonicoError`; its `result` retains diagnostics.
 Other exports include `scaffold`, `manual`, `capabilities`, `version`, `help`,
 `signingDns`, `watch`, and `mcp`.

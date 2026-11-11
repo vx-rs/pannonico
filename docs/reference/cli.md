@@ -82,13 +82,12 @@ editions. WASI and additive ad hoc publication remain serial.
 
 Both native editions accept `--jobs COUNT`, from `1` through the host's logical
 CPU count. The default worker count is the smaller of sixteen and the logical CPU
-count; one page or one worker stays on the serial path. Native Pro additionally
-accepts repeatable `--data-url URL` flags with exactly one HTTPS JSON/YAML
-source per occurrence, plus `--beautify` and `--minify`. Beautification emits
-readable two-space-indented HTML; minification emits conservative compact HTML.
-The output flags are mutually exclusive. Free recognizes these stable Pro
-options, then returns `CAPABILITY_UNSUPPORTED` and status `4` before feature
-side effects.
+count; one page or one worker stays on the serial path. `--beautify` and `--minify` select HTML output formatting.
+Beautification emits readable two-space-indented HTML; minification emits
+conservative compact HTML. The output flags are mutually exclusive. Native Pro
+additionally accepts repeatable `--data-url URL` flags with exactly one HTTPS
+JSON/YAML source per occurrence. Free recognizes `--data-url`, then returns
+`CAPABILITY_UNSUPPORTED` and status `4` before feature side effects.
 
 Sitemap generation has no CLI flag. Configure `site.url` and optional
 `sitemap.enabled` in version-1 project configuration. A verbose build reports
@@ -110,7 +109,7 @@ warning, and retains exit status `0` when no error exists. See
 [`directives.md`](../authoring/directives.md) for the common syntax and
 [`css-inlining.md`](../vite/css-inlining.md) for CSS behavior.
 
-Raw template output remains the default. A selected Pro transformation runs
+Raw template output remains the default. A selected HTML transformation runs
 after template rendering and before final HTML validation, including during a
 dry run or every watch rebuild. Beautification uses fixed two-space indentation,
 LF line endings, no wrapping, and no final newline. It retains authored tag,
@@ -295,9 +294,9 @@ the project preopen are unavailable, and Pannonico's normal relative-path and
 symlink rules still apply inside it. A launcher gives `manual --eject` one
 writable selected root; bare/help manual forms need no filesystem. Scaffold
 `--with-docs` reuses its selected scaffold root. Free WASI supports build, dry
-run, JSON reports, scaffold, manual, MCP stdio, and capability metadata. Pro WASI adds pure HTML
-beautification and minification but excludes parallel rendering, watch, the
-development server, live reload, and Vite process execution at compile time.
+run, JSON reports, scaffold, manual, MCP stdio, and capability metadata. Both
+WASI editions support HTML beautification and minification and exclude parallel
+rendering, watch, the development server, live reload and Vite process execution.
 Both WASI editions can consume an existing Vite manifest and output through
 `vite-integration`. Read the [WASI runtime reference](wasi.md) for the complete
 host, capability, data, Vite, and MCP boundary.

@@ -1,11 +1,11 @@
 # Native Pro capabilities
 
 The [`Free vs Pro`](free-vs-pro.md) comparison describes the product boundary.
-This document defines the technical behavior of Pro capabilities.
+This document covers Pro capabilities and HTML output formatting.
 
 Pro is a compile-time product selection. It cannot be enabled through project
 configuration, a command flag, or an environment variable. Use a distributed
-Pro product when these capabilities are required.
+Pro product to request Pro capabilities.
 
 ## Rich Markdown
 
@@ -84,7 +84,7 @@ or diagnostics.
 ## HTML output modes
 
 Raw template output remains the default. `--beautify` and `--minify` are
-explicit, mutually exclusive Pro choices. The selected transform runs after
+explicit, mutually exclusive HTML output modes. The selected transform runs after
 template execution and Vite tag generation but before final HTML validation.
 The validator therefore checks the exact bytes eligible for publication.
 

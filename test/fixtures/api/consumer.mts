@@ -136,7 +136,7 @@ try {
   await mkdir(path.join(root, 'input'))
   await writeFile(
     path.join(root, 'pages', 'index.html'),
-    '<!doctype html><html><body>Initial {{.data.person.name}}</body></html>',
+    '<!doctype html><html><body>Initial {{.data.person.name}}</body><!-- ordinary-api-comment --></html>',
   )
   await writeFile(path.join(root, 'input', 'person.json'), '{"name":"API"}')
   await manual({ root: leaf, eject: true }, execution)
@@ -170,14 +170,26 @@ try {
     build({ root, quiet: true, verbose: true }),
     error => error instanceof PannonicoError && error.result?.exitCode === 2,
   )
+  // A normal comment makes minification observable; beautification must also
+  // change compact input instead of merely accepting a shared option.
+  await build({ ...options, out: 'beautified', beautify: true }, execution)
+  const beautified = await readFile(
+    path.join(root, 'beautified', 'index.html'),
+    'utf8',
+  )
+  assert.match(beautified, /\n  <body>Initial API<\/body>/)
+  await build({ ...options, out: 'minified', minify: true }, execution)
+  const minified = await readFile(
+    path.join(root, 'minified', 'index.html'),
+    'utf8',
+  )
+  assert.equal(minified, '<!doctype html><html><body>Initial API</body></html>')
   if (EDITION === 'free') {
     await assert.rejects(
-      build({ root, beautify: true }),
+      signingDns({ root }),
       error => error instanceof PannonicoError && error.result?.exitCode === 4,
     )
   } else {
-    await build({ ...options, beautify: true }, execution)
-    await build({ ...options, minify: true }, execution)
     await copyFile(path.join(KEYS, 'key'), path.join(root, 'key'))
     await copyFile(path.join(KEYS, 'key.pub'), path.join(root, 'key.pub'))
     await writeFile(

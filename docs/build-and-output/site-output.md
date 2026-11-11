@@ -4,7 +4,7 @@
 one complete output tree.
 
 No staging directory is created until configuration, discovery, content,
-template, localization, rendering, optional Pro CSS/HTML transformation,
+template, localization, rendering, optional HTML formatting and Pro CSS inlining,
 final-HTML validation, sitemap serialization, combined output-plan validation,
 and pass-through reads have
 completed without errors.

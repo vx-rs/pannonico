@@ -57,9 +57,9 @@ export interface BuildOptions extends RootOptions {
   verbose?: boolean
   /** Disable diagnostic ANSI colors. */
   noColor?: boolean
-  /** Beautify generated HTML; Pro only. */
+  /** Beautify generated HTML. */
   beautify?: boolean
-  /** Minify generated HTML; Pro only. */
+  /** Minify generated HTML. */
   minify?: boolean
 }
 

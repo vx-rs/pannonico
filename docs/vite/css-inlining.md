@@ -138,7 +138,7 @@ The Pro page order is:
 1. render the page and selected layout;
 2. validate actual Pannonico directives;
 3. inline selected CSS;
-4. apply optional Pro `--beautify` or `--minify` output formatting;
+4. apply optional shared `--beautify` or `--minify` output formatting;
 5. audit that no directive remains;
 6. validate the resulting HTML;
 7. publish the complete immutable output plan.

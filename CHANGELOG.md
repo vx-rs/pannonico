@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- **CLI**: Make the existing optional HTML beautification and minification
+  available in Free on native and WASI. Reuse the existing
+  providers and preserve the existing formatting, validation and flag contracts.
+
 Every entry in this section starts with **CLI**, **LSP**, or **CLI and LSP**.
 An independent release moves only its selected track's entries into that
 track's version subsection.

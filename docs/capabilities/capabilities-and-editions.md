@@ -38,7 +38,7 @@ The standard Free product selects the Free runtime at compile time.
 
 Free native includes the core build, scaffold, manual, localization, Markdown,
 validation, sitemap generation, file routing, image optimization, atomic
-output, parallel content preparation and rendering, Vite manifest, and managed
+output, HTML beautification/minification, parallel content preparation and rendering, Vite manifest, and managed
 Vite process capabilities. Its page-worker default is the smaller of sixteen
 and the host's logical CPU count; `--jobs` may select from one through that
 logical-CPU count.
@@ -69,8 +69,8 @@ selected stylesheet, removes the directive, and reports one warning. See
 
 The Pro product selects the Pro runtime at compile time.
 
-Pro native adds explicit Rich Markdown, HTML beautification, HTML minification,
-generic CSS inlining, Signed Resources, bounded HTTPS data, watch,
+Pro native adds explicit Rich Markdown, generic CSS inlining, Signed Resources,
+bounded HTTPS data, watch,
 development serving, and live reload. It uses the same bounded native page
 scheduler and managed Vite process behavior as Free native.
 Pro WASI retains CSS inlining, Rich Markdown, Signed Resources when both key
