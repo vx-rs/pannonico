@@ -6,6 +6,20 @@ Every entry in this section starts with **CLI**, **LSP**, or **CLI and LSP**.
 An independent release moves only its selected track's entries into that
 track's version subsection.
 
+- **CLI**: Add an ESM JavaScript/TypeScript API to the npm package for the
+  installed binaries, including command options, captured results/errors and
+  watch/MCP process handles. Move npm source, tooling and tests to the public
+  pannonico repository; private source keeps Go compilation and coordinates
+  package production through explicit artifact manifests.
+
+## 0.7.1
+
+### LSP
+
+- Preserve saved compiler diagnostics when newer full-text synchronization
+  matches the loaded source bytes, including changes arriving after a disk
+  reload. Continue suppressing saved coordinates for different unsaved text.
+
 ## 0.7.0
 
 ### CLI
