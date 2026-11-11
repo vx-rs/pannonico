@@ -1,0 +1,27 @@
+{{$inlineCSS := get .page "inlineCSS"}}
+{{with .pannonico.vite}}
+  {{$vite := .}}
+  {{if .client}}
+    <script type="module" src="{{.client}}"></script>
+  {{end}}
+  {{with get .entries "app"}}
+    {{range .css}}
+      {{if eq $vite.mode "production"}}
+        {{if $inlineCSS}}
+          <link rel="stylesheet" href="{{.}}" pannonico-inline-css />
+        {{else}}
+          <link rel="stylesheet" href="{{.}}" />
+        {{end}}
+      {{else}}
+        <link rel="stylesheet" href="{{.}}" />
+      {{end}}
+    {{end}}
+    {{range .modulePreload}}
+      <link rel="modulepreload" href="{{.}}" />
+    {{end}}
+    <script type="module" src="{{.file}}"></script>
+  {{end}}
+  {{with get .resources "accentGrid"}}
+    <link rel="preload" as="image" href="{{.file}}" />
+  {{end}}
+{{end}}

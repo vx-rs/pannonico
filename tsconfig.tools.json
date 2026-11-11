@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "declaration": true,
+    "outDir": "./dist/tools",
+    "rootDir": ".",
+    "lib": ["ES2022", "DOM"],
+    "types": ["node"]
+  },
+  "include": ["scripts/**/*.ts", "demo/run-vite.ts"],
+  "exclude": ["**/__tests__/**"]
+}

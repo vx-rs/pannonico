@@ -1,0 +1,28 @@
+version: 1
+
+site:
+  url: https://example.com/pannonico-node-demo
+
+sitemap:
+  enabled: true
+
+richMarkdown:
+  enabled: true
+
+vite:
+  root: .
+  output: .pannonico/vite
+  manifest: .vite/manifest.json
+  manifestFormat: auto
+  publicPath: /
+  entries:
+    app: src/app.ts
+  resources:
+    accentGrid: src/accent-grid.svg
+  buildCommand:
+    executable: node
+    arguments: [../dist/tools/demo/run-vite.js, build]
+  devCommand:
+    executable: node
+    arguments: [../dist/tools/demo/run-vite.js, --host, 127.0.0.1]
+  devServer: http://127.0.0.1:5173

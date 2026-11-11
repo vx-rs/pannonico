@@ -1,0 +1,20 @@
+{
+  "name": "@vx.rs/pannonico-demo",
+  "version": "0.8.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "assets:build": "npm run build --prefix .. --silent && node ../dist/tools/demo/run-vite.js build",
+    "assets:dev": "npm run build --prefix .. --silent && node ../dist/tools/demo/run-vite.js --host 127.0.0.1",
+    "typecheck": "tsc --noEmit",
+    "build": "node ../.local/install/node/pro/node_modules/pannonico/dist/js/bin/pannonico.js build --beautify .",
+    "watch": "node ../.local/install/node/pro/node_modules/pannonico/dist/js/bin/pannonico.js watch --beautify ."
+  },
+  "devDependencies": {
+    "@vx.rs/pannonico": "file:..",
+    "lightningcss": "1.33.0",
+    "sass": "1.103.1",
+    "typescript": "7.0.2",
+    "vite": "^8.3.8"
+  }
+}

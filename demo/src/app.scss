@@ -1,0 +1,117 @@
+$ink: #18212f;
+$surface: #f5f1e8;
+$accent: #b2452d;
+
+:root {
+  --pannonico-demo-accent: #{$accent};
+  color: $ink;
+  background: $surface;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+.site-header,
+footer,
+.demo-shell {
+  width: min(100% - 2rem, 64rem);
+  margin-inline: auto;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 1.5rem;
+
+  nav {
+    display: flex;
+    gap: 1rem;
+  }
+}
+
+.site-name,
+.action {
+  color: $accent;
+  font-weight: 700;
+}
+
+.action:hover {
+  text-decoration-thickness: 0.2em;
+}
+
+.demo-shell {
+  padding-block: clamp(4rem, 12vw, 9rem);
+  background-image: url('./accent-grid.svg');
+  background-position: right top;
+  background-repeat: no-repeat;
+
+  h1 {
+    max-width: 15ch;
+    margin-block: 0 1rem;
+    font-size: clamp(2.5rem, 8vw, 5.5rem);
+    line-height: 0.95;
+  }
+
+  > p {
+    max-width: 42rem;
+    line-height: 1.65;
+  }
+}
+
+.eyebrow {
+  color: $accent;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.status {
+  border-left: 0.25rem solid var(--pannonico-demo-accent);
+  padding: 0.75rem 1rem;
+  background: rgb(255 255 255 / 65%);
+}
+
+.pannonico-container {
+  margin-block: 1.5rem;
+  padding: 0.75rem 1rem;
+  background: rgb(255 255 255 / 65%);
+}
+
+.pannonico-container--build-note {
+  border-inline-start: 0.25rem solid var(--pannonico-demo-accent);
+}
+
+.pannonico-code {
+  padding: 1rem;
+  overflow-x: auto;
+  background: rgb(24 33 47 / 8%);
+
+  .kr,
+  .kt {
+    color: #88419d;
+  }
+
+  .mi {
+    color: #b2452d;
+  }
+}
+
+footer {
+  padding-block: 2rem;
+  border-top: 1px solid rgb(24 33 47 / 20%);
+}
+
+@media (max-width: 42rem) {
+  .site-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

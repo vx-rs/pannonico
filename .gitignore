@@ -1,0 +1,15 @@
+node_modules/
+**/node_modules/
+dist/
+.local/
+coverage/
+*.tsbuildinfo
+*.log
+.npmrc
+.agents/
+.aws/
+.codex/
+**/.pannonico/
+demo/dist/
+demo/dist-native/
+demo/dist-wasi/

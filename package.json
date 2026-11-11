@@ -1,0 +1,70 @@
+{
+  "name": "@vx.rs/pannonico",
+  "version": "0.8.0",
+  "private": true,
+  "description": "TypeScript source and tooling for the Pannonico npm package",
+  "license": "(PolyForm-Noncommercial-1.0.0 OR PolyForm-Small-Business-1.0.0)",
+  "author": "Vladimir Jovanovic",
+  "bin": {
+    "pannonico": "./dist/js/bin/pannonico.js"
+  },
+  "workspaces": [
+    "demo"
+  ],
+  "files": [
+    "dist/js/",
+    "dist/types/",
+    "LICENSE",
+    "LICENSES/",
+    "README.md"
+  ],
+  "type": "module",
+  "scripts": {
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check .",
+    "lint": "oxlint --deny-warnings .",
+    "lint:fix": "oxlint . --fix",
+    "test": "npm run build --silent && vitest run",
+    "test:coverage": "npm run build --silent && vitest run --coverage",
+    "package:test": "npm run build --silent && vitest run scripts/__tests__",
+    "package:check": "npm run build --silent && node dist/tools/scripts/verify-package.js",
+    "package:local": "npm run build --silent && node dist/tools/scripts/build-package-set.js",
+    "package:local:free": "npm run build --silent && node dist/tools/scripts/build-package-set.js --edition free --mode local-free",
+    "package:local:pro": "npm run build --silent && node dist/tools/scripts/build-package-set.js --edition pro --mode development-pro",
+    "package:release:free": "npm run build --silent && node dist/tools/scripts/build-release-package-set.js --edition free",
+    "install:local": "npm run build --silent && node dist/tools/scripts/install-package-set.js",
+    "install:local:free": "npm run build --silent && node dist/tools/scripts/install-package-set.js --package-manifest .local/artifacts/dev/node/free/manifest.json --install-root .local/install/node/free",
+    "install:local:pro": "npm run build --silent && node dist/tools/scripts/install-package-set.js --package-manifest .local/artifacts/dev/node/pro/manifest.json --install-root .local/install/node/pro",
+    "link:local:free": "npm run build --silent && node dist/tools/scripts/link-local-free.js",
+    "test:installed": "npm run build --silent && node dist/tools/scripts/test-installed-package.js",
+    "test:installed:free": "npm run build --silent && node dist/tools/scripts/test-installed-package.js --package-manifest .local/artifacts/dev/node/free/manifest.json --install-root .local/install/node/free --edition free",
+    "test:installed:pro": "npm run build --silent && node dist/tools/scripts/test-installed-package.js --package-manifest .local/artifacts/dev/node/pro/manifest.json --install-root .local/install/node/pro --edition pro",
+    "test:candidate:free": "npm run build --silent && node dist/tools/scripts/test-release-candidate.js --edition free",
+    "demo:assets": "npm run assets:build --workspace @vx.rs/pannonico-demo",
+    "demo:typecheck": "npm run typecheck --workspace @vx.rs/pannonico-demo",
+    "demo:build": "node .local/install/node/pro/node_modules/pannonico/dist/js/bin/pannonico.js build --beautify demo",
+    "demo:watch": "npm run watch --workspace @vx.rs/pannonico-demo",
+    "demo:verify": "npm run build --silent && node dist/tools/scripts/verify-demo.js",
+    "build": "node --input-type=module -e \"import { rmSync } from 'node:fs'; rmSync('dist', { recursive: true, force: true })\" && tsc -p tsconfig.lib.json && tsc -p tsconfig.tools.json && chmod 755 dist/js/bin/pannonico.js",
+    "typecheck": "npm run build --silent && tsc -p tsconfig.spec.json --noEmit",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm test && npm run package:check"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "exports": {
+    "./release": {
+      "types": "./dist/tools/scripts/release-api.d.ts",
+      "import": "./dist/tools/scripts/release-api.js"
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "@vitest/coverage-v8": "^4.1.10",
+    "oxfmt": "^0.78.0",
+    "oxlint": "^1.80.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0",
+    "vitest": "^4.1.10"
+  }
+}
