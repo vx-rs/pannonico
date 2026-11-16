@@ -63,7 +63,7 @@ export interface BuildOptions extends RootOptions {
   minify?: boolean
 }
 
-/** Native Pro watch flags. The binary rejects dry-run and invocation data in watch. */
+/** Native watch flags. The binary rejects dry-run and invocation data in watch. */
 export interface WatchOptions extends Omit<
   BuildOptions,
   'dryRun' | 'data' | 'dataUrls'

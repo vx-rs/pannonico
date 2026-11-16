@@ -5,8 +5,8 @@
 **Pannonico Free** is a complete static-site generator when use is permitted by
 either of its Free licenses.
 
-**Pannonico Pro** adds integrated development automation, bounded external
-data, advanced content, and output transformations. Pro always
+**Pannonico Pro** adds bounded external data, advanced content, and output
+transformations. Pro always
 requires separately approved paid Pro or commercial terms; eligibility for a
 Free license does not grant Pro entitlement.
 
@@ -69,7 +69,7 @@ The governing rule is:
 
 - **Category**: Vite; **Functionality**: Managed Vite production build; **Free**: Yes; **Pro**: Yes; **Availability and product boundary**: Available on native targets. WASI consumes a prebuilt manifest.
 
-- **Category**: Development; **Functionality**: Integrated development mode; **Free**: No; **Pro**: Yes; **Availability and product boundary**: Native Pro provides automatic rebuilds, a preview server, live browser reload, a managed configured Vite development server, and preservation of the last working preview after failed builds. Free uses explicit build and browser-refresh steps.
+- **Category**: Development; **Functionality**: Integrated development mode; **Free**: Yes; **Pro**: Yes; **Availability and product boundary**: Both native editions provide automatic rebuilds, a preview server, live browser reload, a managed configured Vite development server, and preservation of the last working preview after failed builds.
 
 - **Category**: Automation; **Functionality**: Dry run; **Free**: Yes; **Pro**: Yes; **Availability and product boundary**: Baseline CI and correctness workflow.
 
@@ -94,7 +94,6 @@ The governing rule is:
 
 ### Developer-time savings
 
-- Integrated development mode
 - Remote HTTPS data
 
 ### Advanced content
@@ -111,8 +110,8 @@ The governing rule is:
 - Native Free and Pro can run managed Vite production builds.
 - Sitemap generation, file routing, and JPEG/PNG optimization are available in Free and Pro on
   native and WASI targets.
-- Parallel page rendering is available in both native editions. Integrated
-  development mode and remote HTTPS data are native Pro capabilities.
+- Parallel page rendering and Integrated development mode are available in both
+  native editions. Remote HTTPS data requires native Pro.
 - Both WASI editions support HTML beautification and minification. Pro WASI
   also retains Rich Markdown and CSS inlining. Neither target can provide child
   processes, network data, or native development automation.
@@ -120,10 +119,9 @@ The governing rule is:
 
 ## Free onboarding principle
 
-Free development is an explicit loop: edit source, run `pannonico build`, then
-refresh the browser or use an ordinary external static-file server. This is a
-complete production workflow. Pro Integrated development mode automates the
-rebuild, preview, and reload loop without changing what Free can publish.
+Native Free can use `pannonico watch` for automatic rebuilds, preview serving
+and browser reload, including managed Vite development. An explicit edit, build
+and refresh loop remains available. WASI requires host-provided preview tools.
 
 ## Technical references
 

@@ -139,6 +139,12 @@ try {
     '<!doctype html><html><body>Initial {{.data.person.name}}</body><!-- ordinary-api-comment --></html>',
   )
   await writeFile(path.join(root, 'input', 'person.json'), '{"name":"API"}')
+  // Watch reads project configuration rather than invocation data flags.
+  // Both native editions need the same input root for the first preview build.
+  await writeFile(
+    path.join(root, 'pannonico.yaml'),
+    'version: 1\npaths:\n  data: input\nsitemap:\n  enabled: false\n',
+  )
   await manual({ root: leaf, eject: true }, execution)
   await access(path.join(root, 'documentation', 'README.md'))
   const options = {
@@ -202,12 +208,13 @@ try {
     )
   }
   await initializeMcp(mcp({ root }))
-  if (EDITION !== 'pro' || WASI) {
+  if (WASI) {
     await assert.rejects(
       watch({ root }).completed,
       error => error instanceof PannonicoError && error.result?.exitCode === 4,
     )
   } else if (process.platform !== 'win32') {
+    assert.ok((await help('watch')).stdout.length > 0)
     const port = await freePort()
     const session = watch({ root, port, quiet: true })
     const completion = session.completed

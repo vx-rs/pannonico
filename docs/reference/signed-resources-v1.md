@@ -63,7 +63,7 @@ the origin root.
 
 ## Signed watch previews
 
-The Pro watch server serves signed HTML unchanged. It does not inject the live
+The Pro preview server serves signed HTML unchanged. It does not inject the live
 reload script into a tree containing `pannonico-integrity.json`, because that
 would invalidate the observed HTML hash. Watch automatically rebuilds and
 re-signs on every source change. Refresh signed preview pages manually after

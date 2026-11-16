@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Make the existing native watch, preview, reload and managed Vite development workflow available in Free.
+- Build maintained artifacts with Go 1.27.4.
+
 - **CLI**: Make the existing optional HTML beautification and minification
   available in Free on native and WASI. Reuse the existing
   providers and preserve the existing formatting, validation and flag contracts.

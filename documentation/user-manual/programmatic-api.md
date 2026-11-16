@@ -169,8 +169,9 @@ Long-running sessions do not accumulate a transcript in the wrapper.
 
 ## Edition and target availability
 
-Native Free and Pro both support page-rendering jobs and managed production
-Vite builds. Native Pro adds watch and remote data. Pro adds CSS inlining, Rich Markdown
+Native Free and Pro both support page-rendering jobs, managed production
+Vite builds, and watch with preview, live reload, and configured Vite development.
+Native Pro adds remote data. Pro adds CSS inlining, Rich Markdown
 and signing; WASI cannot provide native watch, network data,
 or managed child Vite processes. Unsupported requests fail with the binary's
 capability error instead of silently succeeding.

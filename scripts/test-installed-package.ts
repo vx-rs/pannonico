@@ -397,6 +397,18 @@ export const testInstalledPackage = async (
       'missing-native installed CLI',
       releaseHelpFooter,
     )
+    // Missing-native fallback must report the WASI target boundary instead of
+    // starting a development process or claiming watch requires another edition.
+    for (const args of [['watch'], ['watch', '--help'], ['help', 'watch']]) {
+      await assert.rejects(
+        runInstalledCLI(isolatedInstall, args, { environment }),
+        error =>
+          error instanceof Error &&
+          /failed with status 4:/.test(error.message) &&
+          /capability=watch/.test(error.message) &&
+          /reason=target/.test(error.message),
+      )
+    }
     const fallbackSite = path.join(operationRoot, 'wasi-site')
     await mkdir(fallbackSite)
     await runInstalledCLI(

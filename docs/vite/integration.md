@@ -9,7 +9,7 @@ The integration is optional. Projects without a `vite` mapping do not need
 Node.js, do not inspect a manifest, and retain their existing output.
 
 Start with [`vite-getting-started.md`](getting-started.md) for a complete
-CSS and JavaScript setup, the SCSS and TypeScript upgrade, native Pro
+CSS and JavaScript setup, the SCSS and TypeScript upgrade, native
 Integrated development mode,
 external builds, WASI, and optional Vue. This document defines the detailed
 configuration, runtime, and compatibility contract.
@@ -108,18 +108,25 @@ its own root.
 
 ## Configuration
 
-| Field | Meaning |
-| --- | --- |
-| `root` | Vite project and command working directory. Default: `frontend`. |
-| `output` | Dedicated Vite output below `root`. Default: `.pannonico/vite`. |
-| `manifest` | Manifest path below `output`. Default: `.vite/manifest.json`. |
-| `manifestFormat` | `auto` or a stable Pannonico format ID. Default: `auto`. |
-| `publicPath` | Production URL prefix. It may be root-relative or absolute HTTP(S). Default: `/`. |
-| `entries` | Template aliases mapped to Vite source keys. At least one is required. |
-| `resources` | Optional aliases mapped to exact manifest keys or `src` values. Each resolves to one emitted file URL. |
-| `buildCommand` | Optional native production command. Omit it for externally built assets. |
-| `devCommand` | Optional native Pro Integrated development mode command. Omit it for an external Vite server. |
-| `devServer` | Exact HTTP(S) public base used by Integrated development mode and development URLs. It may include a clean path; an authored trailing `/` is accepted and normalized away. |
+- **Field**: `root`; **Meaning**: Vite project and command working directory. Default: `frontend`.
+
+- **Field**: `output`; **Meaning**: Dedicated Vite output below `root`. Default: `.pannonico/vite`.
+
+- **Field**: `manifest`; **Meaning**: Manifest path below `output`. Default: `.vite/manifest.json`.
+
+- **Field**: `manifestFormat`; **Meaning**: `auto` or a stable Pannonico format ID. Default: `auto`.
+
+- **Field**: `publicPath`; **Meaning**: Production URL prefix. It may be root-relative or absolute HTTP(S). Default: `/`.
+
+- **Field**: `entries`; **Meaning**: Template aliases mapped to Vite source keys. At least one is required.
+
+- **Field**: `resources`; **Meaning**: Optional aliases mapped to exact manifest keys or `src` values. Each resolves to one emitted file URL.
+
+- **Field**: `buildCommand`; **Meaning**: Optional native production command. Omit it for externally built assets.
+
+- **Field**: `devCommand`; **Meaning**: Optional native Integrated development mode command. Omit it for an external Vite server.
+
+- **Field**: `devServer`; **Meaning**: Exact HTTP(S) public base used by Integrated development mode and development URLs. It may include a clean path; an authored trailing `/` is accepted and normalized away.
 
 Commands use an executable and literal arguments. Pannonico does not split a
 string, invoke a shell, expand variables or globs, read `package.json` scripts,
@@ -320,9 +327,9 @@ Internal imports remain Vite-owned manifest and chunk data.
 existing manifest and output snapshot and includes Vite files in
 `wouldCopyFiles`. Build the assets first if the snapshot is absent.
 
-### Pro Integrated development mode
+### Native Integrated development mode
 
-Native Pro Integrated development mode starts `devCommand` once when
+Native Integrated development mode starts `devCommand` once when
 configured, or waits for an
 external server. It polls `<devServer>/@vite/client` before the first site build.
 Vite owns asset HMR. Pannonico watches only its config, pages, layouts, partials,
@@ -391,13 +398,15 @@ public graph.
 
 ## Edition and runtime matrix
 
-| Behavior                                                | Free native | Pro native | Free WASI   | Pro WASI    |
-|---------------------------------------------------------|-------------|------------|-------------|-------------|
-| Vite omitted; no Node or manifest work                  | Supported   | Supported  | Supported   | Supported   |
-| Consume an externally built manifest                    | Supported   | Supported  | Supported   | Supported   |
-| Run managed `buildCommand`                              | Supported   | Supported  | Unavailable | Unavailable |
-| Production entries, resources, and complete output copy | Supported   | Supported  | Supported   | Supported   |
-| Integrated development mode with coordinated Vite HMR   | Unavailable | Supported  | Unavailable | Unavailable |
+- **Behavior**: Vite omitted; no Node or manifest work; **Free native**: Supported; **Pro native**: Supported; **Free WASI**: Supported; **Pro WASI**: Supported.
+
+- **Behavior**: Consume an externally built manifest; **Free native**: Supported; **Pro native**: Supported; **Free WASI**: Supported; **Pro WASI**: Supported.
+
+- **Behavior**: Run managed `buildCommand`; **Free native**: Supported; **Pro native**: Supported; **Free WASI**: Unavailable; **Pro WASI**: Unavailable.
+
+- **Behavior**: Production entries, resources, and complete output copy; **Free native**: Supported; **Pro native**: Supported; **Free WASI**: Supported; **Pro WASI**: Supported.
+
+- **Behavior**: Integrated development mode with coordinated Vite HMR; **Free native**: Supported; **Pro native**: Supported; **Free WASI**: Unavailable; **Pro WASI**: Unavailable.
 
 WASI production must receive one clean host-built Vite output. Free and Pro
 consume the same normalized manifest contract; edition choice does not change

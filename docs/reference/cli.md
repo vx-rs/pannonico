@@ -20,15 +20,15 @@ pannonico --version
 `-h` aliases `--help`; `-v` and the `version` command alias `--version`.
 Build flags may appear before or after its optional root or page. The root
 defaults to the current directory. `pannonico help <command>` prints
-command-specific usage. Unknown syntax exits `2`; the known Pro-only `watch`
-command exits `4` in the Free binary.
+command-specific usage. Unknown syntax exits `2`; native-only `watch` exits `4`
+on WASI with a target capability diagnostic.
 
 Top-level and manual help end with the documentation-site link. A release may
 compile one optional note after that link, separated by a blank line. The note
 is blue on a color-enabled stdout terminal, plain when color is suppressed or
 output is redirected, and absent when the release configures an empty value.
 
-A native Pro binary also provides `pannonico watch [flags] [root]`.
+Both native editions provide `pannonico watch [flags] [root]`.
 Asset signing (Signed Resources) is experimental and requires further testing.
 
 Both Pro targets provide `pannonico signing-dns [--config PATH] [root]`.
@@ -207,11 +207,11 @@ does not write `pannonico.yaml`.
 CSS, a Vite tag partial, and `pannonico.yaml`. The running binary selects the
 profile from its compiled capabilities:
 
-| Profile     | Configuration                                                                                |
-|-------------|----------------------------------------------------------------------------------------------|
-| Free native | Runs the Vite production build before `pannonico build`; does not configure Pannonico watch. |
-| Pro native  | Runs production builds and configures the coordinated Vite dev server for `pannonico watch`. |
-| WASI        | Omits process commands; the host builds Vite before Pannonico consumes the manifest.         |
+- **Profile**: Free native; **Configuration**: Runs production builds and configures coordinated Vite development..
+
+- **Profile**: Pro native; **Configuration**: Adds Rich Markdown to the native build and development configuration..
+
+- **Profile**: WASI; **Configuration**: Omits process commands; the host builds Vite before Pannonico consumes the manifest..
 
 Both Free and Pro WASI use the WASI profile. Scaffolding writes files only. It
 does not install npm dependencies or execute Vite. Follow the generated
@@ -250,7 +250,7 @@ configuration. MCP `inspect_project` returns the same names in the same order.
 schema-v1 reports are not full capability
 discovery surfaces.
 
-## Native Pro Integrated development mode
+## Native Integrated development mode
 
 The `watch` command provides Integrated development mode: automatic Pannonico
 rebuilds, a preview server, live browser reload, and a managed configured Vite

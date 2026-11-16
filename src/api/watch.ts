@@ -14,7 +14,7 @@ import type {
 // Functions
 // -----------------------------------------------------------------------------
 /**
- * Start native Pro watch with inherited output and a caller-owned process lifetime.
+ * Start native watch with inherited output and a caller-owned process lifetime.
  * Observe completed immediately; process creation does not indicate serving readiness.
  */
 export const watch = (

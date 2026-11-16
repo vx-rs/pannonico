@@ -46,7 +46,7 @@ scripts. Consumers do not rebuild or repair producer files.
 Installed tests cover the CLI and a TypeScript consumer compiled against the
 installed package's declarations, then executed as JavaScript. They exercise
 native and forced-WASI API behavior, schema-v1 reports, dry-run, signing, MCP
-initialization/EOF, and native Pro watch serving, rebuild, and POSIX shutdown.
+initialization/EOF, and native watch serving, rebuild, and POSIX shutdown in both editions.
 A separate missing-native installation proves automatic fallback.
 
 `PANNONICO_NPM_LOCAL_ROOT` selects an explicit maintainer artifact workspace for

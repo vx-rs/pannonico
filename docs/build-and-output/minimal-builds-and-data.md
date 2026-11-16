@@ -57,7 +57,7 @@ pannonico build article.html --data ../shared-data --out dist
 
 JSON and YAML files retain nested-path identifiers under `.data`. Pannonico
 uses the same strict decoding, identifier, collision, symlink, and merge rules
-as project data. Native Pro watch does not accept invocation data; configure a
+as project data. Native watch does not accept invocation data; configure a
 project-relative `paths.data` directory for watch.
 
 WASI can use only a directory visible inside its one host preopen. Its launcher
@@ -98,7 +98,7 @@ cancellation. Downloaded bytes remain in memory.
 
 Free and both WASI editions omit `--data-url`. They accept `data.urls` as known
 schema but return `CAPABILITY_UNSUPPORTED` before discovery, Vite, rendering,
-or output. Remote data is also excluded from Pro watch in this phase.
+or output. Remote data is also excluded from Watch in this phase.
 
 ## Minimal scaffold and Vite
 

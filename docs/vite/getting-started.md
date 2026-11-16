@@ -23,9 +23,8 @@ cd my-site
 
 Pannonico selects the generated configuration from the running binary:
 
-- Free native creates managed production build configuration.
-- Pro native also creates coordinated Vite configuration for Integrated
-  development mode through `pannonico watch`.
+- Both native editions create managed production and coordinated Vite development
+  configuration through `pannonico watch`. The Pro profile also enables Rich Markdown.
 - Free and Pro WASI create process-free configuration for host-built assets.
 
 Read the generated `README.md` and run its first commands. Scaffolding does not
@@ -38,12 +37,12 @@ Install these tools before you start:
 
 - a native Pannonico binary or WASI-capable Pannonico launcher;
 - Node.js and npm;
-- the native Pro binary if you want Integrated development mode through
+- a native binary for Integrated development mode through
   `pannonico watch`, whether Pannonico starts Vite or waits for an external
   Vite server.
 
 The production build works in Free and Pro. `pannonico watch` starts Integrated
-development mode, a native Pro capability. WASI can consume built Vite output
+development mode on native targets. WASI can consume built Vite output
 but cannot start Node.js or Vite.
 
 The commands below run from the Pannonico site root unless a step changes the
@@ -389,7 +388,7 @@ before Pannonico reads the manifest.
 
 ## 9. Use Integrated development mode with Vite
 
-Start Integrated development mode with native Pro from the site root:
+Start Integrated development mode with a native binary from the site root:
 
 ```sh
 pannonico watch .

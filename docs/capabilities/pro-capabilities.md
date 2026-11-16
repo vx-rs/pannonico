@@ -1,7 +1,8 @@
 # Native Pro capabilities
 
 The [`Free vs Pro`](free-vs-pro.md) comparison describes the product boundary.
-This document covers Pro capabilities and HTML output formatting.
+This document covers Pro capabilities and the shared HTML formatting and
+native development workflows used alongside them.
 
 Pro is a compile-time product selection. It cannot be enabled through project
 configuration, a command flag, or an environment variable. Use a distributed
@@ -132,11 +133,13 @@ and non-email contracts.
 
 ## Integrated development mode
 
+This workflow is available in Free and Pro; signing still requires Pro.
+
 ```text
-pannonico-pro watch --jobs 4 --beautify --host 127.0.0.1 --port 3000 SITE
+pannonico watch --jobs 4 --beautify --host 127.0.0.1 --port 3000 SITE
 ```
 
-Native Pro provides the watcher, preview server, live browser reload, and
+Both native editions provide the watcher, preview server, live browser reload, and
 managed configured Vite development server as one Integrated development mode.
 These parts are available together rather than as separate product modes.
 
