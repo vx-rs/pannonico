@@ -87,18 +87,23 @@ fields with surrounding ASCII spaces removed. Require each of `v=PAN1`,
 `alg=ed25519`, and `key` exactly once. Unrelated TXT records are not keys;
 malformed or conflicting Pannonico records are failures.
 
-If a validating DNS resolver reports genuine absence of a Pannonico key, the
-verifier may use `pannonico-key.pub` from the manifest directory. For
-`localhost` and IP-address sites, the Firefox verifier skips DNS and uses that
-same key directly. It still checks the manifest signature, the key file's hash,
-and loaded resource hashes. The result can be yellow, never DNS-authenticated
-green. The key is served by the site, not stored in the verifier.
+For a named host outside the add-on's preferences list, the Firefox verifier
+requires a DNSSEC-validated Pannonico TXT key before requesting the manifest.
+When the resolver finds no Pannonico key, verification is skipped and the
+popup shows **Not verified**. A resolver or validation error stops verification
+with a failure before the extension requests either file.
 
-Local-key verification shows consistency only: someone who can replace the
-site may replace its key and manifest together. A present but unusable DNS key
-on a named host must not trigger fallback. The manifest never names or selects
-the trusted DNS key. The manifest and key fetches stay on the visited origin,
-including its port, and in the selected manifest directory.
+For a host listed in Firefox add-on preferences, the extension skips DNS and
+uses `pannonico-key.pub` from the manifest directory. `localhost` is listed
+by default. It can be removed, and other hostnames and IP addresses can be
+added explicitly. The extension checks the manifest signature, the key file's
+hash, and loaded resource hashes. Successful local-key verification shows
+**Locally consistent**. Someone who can replace the site can replace its key
+and manifest together.
+
+The manifest never selects the trusted DNS key. Both file requests stay on
+the visited origin, including its port, and in the selected manifest
+directory.
 
 ## Browser discovery
 
@@ -114,8 +119,8 @@ The field is an origin-relative URL that includes the `site.url` path when
 signing is enabled, and null otherwise. For copied HTML that Pannonico does
 not render, author the literal URL in that document. A verifier treats the
 hint as an untrusted same-origin location and binds the manifest's directory
-to the site root. If no hint exists, it tries `/pannonico-integrity.json` at
-the origin root.
+to the site root. When verification is eligible and no hint exists, Firefox
+tries `/pannonico-integrity.json` at the origin root.
 
 ## Known-answer vector
 
