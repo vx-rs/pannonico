@@ -2,8 +2,11 @@
 
 ## Unreleased
 
-- Make the existing native watch, preview, reload and managed Vite development workflow available in Free.
-- Build maintained artifacts with Go 1.27.4.
+- **CLI**: Make the existing native watch, preview, reload and managed Vite
+  development workflow available in Free.
+- **CLI**: Subscribe reload streams before their initial connection flush so
+  a build completing as the browser connects cannot lose its reload event.
+- **CLI and LSP**: Build maintained artifacts with Go 1.27.4.
 
 - **CLI**: Make the existing optional HTML beautification and minification
   available in Free on native and WASI. Reuse the existing
