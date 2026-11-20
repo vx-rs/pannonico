@@ -1,22 +1,15 @@
 # Vite integration
 
-Pannonico can consume a Vite backend manifest without making Vite part of page
-rendering. Pannonico renders HTML and Markdown through Go templates. Vite owns
-TypeScript, JavaScript, CSS, SCSS, framework plugins, imported assets, and the
-frontend module graph.
+Pannonico renders HTML and Markdown through Go templates. If you configure
+Vite, Pannonico reads its manifest to find the files Vite built for your
+templates. Vite handles TypeScript, JavaScript, styles, framework plugins, and
+imported frontend assets. Projects without a `vite` mapping use the ordinary
+build and can build without Node.js.
 
-The integration is optional. Projects without a `vite` mapping do not need
-Node.js, do not inspect a manifest, and retain their existing output.
-
-Start with [`vite-getting-started.md`](getting-started.md) for a complete
-CSS and JavaScript setup, the SCSS and TypeScript upgrade, native
-Integrated development mode,
-external builds, WASI, and optional Vue. This document defines the detailed
-configuration, runtime, and compatibility contract.
-
-The [getting-started guide](getting-started.md) builds a complete configuration,
-Vite input, shared HTML/Markdown layout, ordinary CSS, SCSS, TypeScript,
-partial, and production/development tag policy from an installed scaffold.
+Follow the [getting-started guide](getting-started.md) to build CSS and JavaScript
+from an installed scaffold and add the asset tags to a shared layout. It also
+covers SCSS, TypeScript, Vue, native development mode, and how to produce the
+manifest separately for WASI.
 
 ## Ownership
 
@@ -416,9 +409,10 @@ entry or resource URLs.
 
 Pannonico supports manifest formats, not individual Vite versions.
 
-| Pannonico format  | Selection             | Status                                        | Latest tested Vite |
-|-------------------|-----------------------|-----------------------------------------------|--------------------|
-| `vite-backend-v1` | Automatic or explicit | Supported for the complete Pannonico 1.x line | `8.3.0`            |
+- **`vite-backend-v1`**
+  - **Selection** Automatic or explicit
+  - **Status** Supported for the complete Pannonico 1.x line
+  - **Latest tested Vite** `8.3.0`
 
 Selection order is explicit `manifestFormat`, a recognized schema marker, then
 structural detection. An unknown marker does not fall back. Automatic selection

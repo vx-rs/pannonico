@@ -25,19 +25,20 @@ project development dependencies, for example `typescript` and `@types/node`.
 The shipped declarations include the Node process and stream types exposed by
 the API; these tools are not runtime dependencies of Pannonico.
 
-Every invocation starts this installed package's CLI launcher through the
-current Node executable. It verifies and runs its own native binary, or its
-bundled verified WASI fallback under the existing selection policy. A global
-`pannonico` command, PATH executable, private source checkout, or runtime
-download is not used. Importing the package alone starts no process.
+Calling a function starts the installed package's CLI launcher with the
+current Node executable. The launcher checks the native binary installed
+with the package before running it. When the fallback rules apply, it runs
+the verified WASI module shipped with the package. You can import the API
+before choosing a project because the function call starts the process.
 
 ## Results, failures, and execution context
 
-Finite functions return `Promise<PannonicoResult>` with `exitCode`, `signal`,
-`stdout`, and `stderr`. Output is buffered as UTF-8 until the process and streams
-close. Exit 0 resolves. Nonzero exit or signal rejects with `PannonicoError` and
-its `result`. Node spawn errors retain `cause`. Binary and launcher diagnostics
-are preserved; the caller's exit code is unchanged.
+Finite functions wait for the process and its streams to close. When the
+command exits successfully, read `stdout` and `stderr` on the
+`PannonicoResult` for the captured UTF-8 text. When it exits with an error or
+signal, catch `PannonicoError` and inspect `result` for the same output and
+the exit information. If Node fails to start the process, inspect `cause`.
+Your application decides how to handle the failure and whether to exit.
 
 `PannonicoExit` contains `exitCode: number | null` and
 `signal: NodeJS.Signals | null`. A signal termination has a null exit code.

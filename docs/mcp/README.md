@@ -70,13 +70,30 @@ individual Pannonico tools. A suitable project instruction is:
 
 ## Tools
 
-| Tool | Input | Result and use | Effects |
-| --- | --- | --- | --- |
-| `inspect_project` | `{}` | Resolved safe configuration, page output/public-URL identities and sitemap exclusion controls, sitemap policy/plan state, layouts, partials, data-source provenance, copied files, localization, Vite metadata, available capabilities, validity, and diagnostic counts. | Fresh full dry run; may fetch configured remote data. |
-| `validate_project` | `{}` | `{valid, report}` using the current schema-v1 report, including sitemap plan state. Use after edits and before publication. An invalid project is an ordinary successful result with `valid: false`. | Fresh full dry run; may fetch configured remote data. |
-| `inspect_page` | `{"sourcePath":"pages/about.html"}` | Exact page identity, output/public URL path, compiler format, controls including sitemap exclusion, selected layout, partials, localization, and page-relevant diagnostics. | Fresh full dry run; missing or invalid paths set `isError`. |
-| `render_page` | `{"sourcePath":"pages/about.html"}` | Already-rendered UTF-8 HTML, identities, and page-relevant diagnostics. Available HTML is successful even when another page or final validation makes the project invalid. | Fresh full dry run; generated HTML contains authored content. |
-| `build` | `{}` | Publication state, output path, rendered count, and current schema-v1 report, including generated sitemap state and build-level image metadata information. | Real production build; may replace output, run configured Vite work, and fetch remote data. Destructive and non-idempotent. |
+- **`inspect_project`**
+  - **Input** `{}`
+  - **Result and use** Resolved safe configuration, page output/public-URL identities and sitemap exclusion controls, sitemap policy/plan state, layouts, partials, data-source provenance, copied files, localization, Vite metadata, available capabilities, validity, and diagnostic counts.
+  - **Effects** Fresh full dry run; may fetch configured remote data.
+
+- **`validate_project`**
+  - **Input** `{}`
+  - **Result and use** `{valid, report}` using the current schema-v1 report, including sitemap plan state. Use after edits and before publication. An invalid project is an ordinary successful result with `valid: false`.
+  - **Effects** Fresh full dry run; may fetch configured remote data.
+
+- **`inspect_page`**
+  - **Input** `{"sourcePath":"pages/about.html"}`
+  - **Result and use** Exact page identity, output/public URL path, compiler format, controls including sitemap exclusion, selected layout, partials, localization, and page-relevant diagnostics.
+  - **Effects** Fresh full dry run; missing or invalid paths set `isError`.
+
+- **`render_page`**
+  - **Input** `{"sourcePath":"pages/about.html"}`
+  - **Result and use** Already-rendered UTF-8 HTML, identities, and page-relevant diagnostics. Available HTML is successful even when another page or final validation makes the project invalid.
+  - **Effects** Fresh full dry run; generated HTML contains authored content.
+
+- **`build`**
+  - **Input** `{}`
+  - **Result and use** Publication state, output path, rendered count, and current schema-v1 report, including generated sitemap state and build-level image metadata information.
+  - **Effects** Real production build; may replace output, run configured Vite work, and fetch remote data. Destructive and non-idempotent.
 
 `sourcePath` is the exact slash-separated project-relative identity returned by
 `inspect_project`, not an absolute path, route, output path, glob, or basename.
@@ -147,11 +164,17 @@ discovery field.
 Reference failures use the same build truth as the CLI and editor, but MCP is a
 fresh request/response surface rather than a watcher:
 
-| Change | Complete MCP tools | Focused MCP tools |
-| --- | --- | --- |
-| Remove an evaluated local data key or direct navigation page | `validate_project` and `build` include `TEMPLATE_EXECUTION_FAILED`; `inspect_project` exposes the resulting error count. | `inspect_page` and `render_page` include the failure only for a related requested page. |
-| Remove a literal partial | Complete reports include `TEMPLATE_MISSING_PARTIAL`. | Related page/render results include it; unrelated pages omit it. |
-| Remove a selected layout | Complete reports include `LAYOUT_MISSING`. | The page selecting that layout includes it; unrelated pages omit it. |
+- **Remove an evaluated local data key or direct navigation page**
+  - **Complete MCP tools** `validate_project` and `build` include `TEMPLATE_EXECUTION_FAILED`; `inspect_project` exposes the resulting error count.
+  - **Focused MCP tools** `inspect_page` and `render_page` include the failure only for a related requested page.
+
+- **Remove a literal partial**
+  - **Complete MCP tools** Complete reports include `TEMPLATE_MISSING_PARTIAL`.
+  - **Focused MCP tools** Related page/render results include it; unrelated pages omit it.
+
+- **Remove a selected layout**
+  - **Complete MCP tools** Complete reports include `LAYOUT_MISSING`.
+  - **Focused MCP tools** The page selecting that layout includes it; unrelated pages omit it.
 
 Every later read-only call reruns the current dry pipeline, so restoring the
 source is visible without restarting the MCP server. Literal missing partials

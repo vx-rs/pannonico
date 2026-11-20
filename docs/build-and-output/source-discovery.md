@@ -55,17 +55,50 @@ changing ownership.
 
 Extensions are exact and case-sensitive.
 
-| Root     | File                     | Classification         | Output candidate                                          |
-|----------|--------------------------|------------------------|-----------------------------------------------------------|
-| pages    | `.html`                  | rendered page          | exact relative path                                       |
-| pages    | `.md`                    | rendered Markdown page | relative path with `.md` replaced by `.html`              |
-| pages    | `.markdown`              | rendered Markdown page | relative path with `.markdown` replaced by `.html`        |
-| pages    | `.yaml`, `.yml`          | page-local data        | none                                                      |
-| pages    | `.json`                  | page-local data        | exact relative path, copied unchanged by site publication |
-| pages    | every other regular file | copied file            | exact relative path                                       |
-| layouts  | `.html`                  | layout                 | none                                                      |
-| partials | `.html`                  | partial                | none                                                      |
-| data     | `.json`, `.yaml`, `.yml` | global data            | none                                                      |
+- **pages**
+  - **File** `.html`
+  - **Classification** rendered page
+  - **Output candidate** exact relative path
+
+- **pages**
+  - **File** `.md`
+  - **Classification** rendered Markdown page
+  - **Output candidate** relative path with `.md` replaced by `.html`
+
+- **pages**
+  - **File** `.markdown`
+  - **Classification** rendered Markdown page
+  - **Output candidate** relative path with `.markdown` replaced by `.html`
+
+- **pages**
+  - **File** `.yaml`, `.yml`
+  - **Classification** page-local data
+  - **Output candidate** none
+
+- **pages**
+  - **File** `.json`
+  - **Classification** page-local data
+  - **Output candidate** exact relative path, copied unchanged by site publication
+
+- **pages**
+  - **File** every other regular file
+  - **Classification** copied file
+  - **Output candidate** exact relative path
+
+- **layouts**
+  - **File** `.html`
+  - **Classification** layout
+  - **Output candidate** none
+
+- **partials**
+  - **File** `.html`
+  - **Classification** partial
+  - **Output candidate** none
+
+- **data**
+  - **File** `.json`, `.yaml`, `.yml`
+  - **Classification** global data
+  - **Output candidate** none
 
 Layouts, partials, and global data are strict roots. Any other regular file in
 those roots fails discovery. Move a pass-through file under pages.

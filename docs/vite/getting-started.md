@@ -371,11 +371,17 @@ a separate `tsc --noEmit` script when the site needs static type checking. The
 generated Pannonico Vite scaffold names this script `typecheck`, so its three
 frontend convenience commands are:
 
-| npm command                              | Underlying command                               | Use                                            |
-|------------------------------------------|--------------------------------------------------|------------------------------------------------|
-| `npm run assets:build` | `vite build`                                     | Write the production Vite output and manifest. |
-| `npm run assets:dev`   | `vite --host 127.0.0.1 --port 5173 --strictPort` | Start the fixed local development server.      |
-| `npm run typecheck`    | `tsc --noEmit`                                   | Check TypeScript without writing JavaScript.   |
+- **`npm run assets:build`**
+  - **Underlying command** `vite build`
+  - **Use** Write the production Vite output and manifest.
+
+- **`npm run assets:dev`**
+  - **Underlying command** `vite --host 127.0.0.1 --port 5173 --strictPort`
+  - **Use** Start the fixed local development server.
+
+- **`npm run typecheck`**
+  - **Underlying command** `tsc --noEmit`
+  - **Use** Check TypeScript without writing JavaScript.
 
 Run another production build:
 

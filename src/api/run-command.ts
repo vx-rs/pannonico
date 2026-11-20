@@ -9,9 +9,9 @@ import type { ExecutionOptions, PannonicoResult } from './types.js'
 // Functions
 // -----------------------------------------------------------------------------
 /**
- * Run a finite command with captured output and ignored stdin.
- * The async boundary also turns synchronous Node argument/spawn errors into
- * promise rejection for build scripts awaiting any finite operation.
+ * Runs a finite API command with stdin disconnected and collects stdout
+ * and stderr. Callers can await one promise for the result, including
+ * rejection when Node cannot start the child.
  */
 export const runCommand = async (
   args: readonly string[],

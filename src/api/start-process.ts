@@ -21,9 +21,10 @@ const CLI_PATH = fileURLToPath(new URL('../bin/pannonico.js', import.meta.url))
 // Functions
 // -----------------------------------------------------------------------------
 /**
- * Start the package's CLI in a separate process and settle after its streams close.
- * Isolation keeps launcher signal handlers and synchronous WASI out of the caller.
- * Only finite commands capture output; session pipes belong to their consumer.
+ * Starts the package's CLI in a separate Node process. The caller keeps its
+ * own signal handlers and can continue working while the binary runs. Finite
+ * commands capture output. MCP callers read their own pipes, while watch
+ * inherits output. The completion promise settles after the streams close.
  */
 export const startProcess = (
   args: readonly string[],

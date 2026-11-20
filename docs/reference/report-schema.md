@@ -64,14 +64,29 @@ report write fails, committed counters remain accurate even though
 The `sitemap` object always exists. Its fields distinguish resolved policy,
 planning, and publication:
 
-| Reason                     | Meaning                                                                     |
-|----------------------------|-----------------------------------------------------------------------------|
-| `configuration_unresolved` | Configuration failed before sitemap policy could resolve.                   |
-| `disabled`                 | `sitemap.enabled` is false.                                                 |
-| `site_url_missing`         | Generation is enabled but `site.url` is absent.                             |
-| `dry_run`                  | Complete valid sitemap bytes were planned without publication.              |
-| `build_failed`             | An eligible sitemap was not published because planning or the build failed. |
-| empty string               | The real build published the sitemap successfully.                          |
+- **`configuration_unresolved`**
+
+  Configuration failed before sitemap policy could resolve.
+
+- **`disabled`**
+
+  `sitemap.enabled` is false.
+
+- **`site_url_missing`**
+
+  Generation is enabled but `site.url` is absent.
+
+- **`dry_run`**
+
+  Complete valid sitemap bytes were planned without publication.
+
+- **`build_failed`**
+
+  An eligible sitemap was not published because planning or the build failed.
+
+- **empty string**
+
+  The real build published the sitemap successfully.
 
 `wouldGenerate` is true only when validated bytes exist. A dry run then sets
 `wouldGenerateFiles` to 1 and `generated` to false. A successful real build

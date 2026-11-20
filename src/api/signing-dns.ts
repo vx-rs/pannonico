@@ -14,8 +14,9 @@ import type {
 // Functions
 // -----------------------------------------------------------------------------
 /**
- * Print the experimental signing TXT record from the binary's configured keys.
- * This invokes the existing Pro helper and does not modify DNS.
+ * Returns the experimental signing TXT record in `stdout`. The Pro binary
+ * reads the selected project's signing keys and site URL to produce the
+ * record. Copy that record to your DNS provider when you are ready to publish it.
  */
 export const signingDns = async (
   options: SigningDnsOptions = {},

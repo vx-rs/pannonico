@@ -54,23 +54,65 @@ available capability names shown by `pannonico capabilities`.
 
 ## Build flags
 
-| Flag                         | Behavior                                                                                                     |
-|------------------------------|--------------------------------------------------------------------------------------------------------------|
-| `--config PATH`              | Select a config file inside the project root.                                                                |
-| `--pages PATH`               | Select one page file or a pages directory.                                                                   |
-| `--layouts PATH`             | Override the layouts directory.                                                                              |
-| `--partials PATH`            | Override the partials directory.                                                                             |
-| `--data PATH`                | Replace project data with one invocation-local directory.                                                    |
-| `--out PATH`                 | Override the output directory.                                                                               |
-| `--default-layout NAME`      | Override the default layout.                                                                                 |
-| `--default-language CODE`    | Override the default language.                                                                               |
-| `--html-validation MODE`     | Select `off`, `warn`, or `error`.                                                                            |
-| `--max-output-workers COUNT` | Lower the staged-file publication worker limit.                                                              |
-| `--dry-run`                  | Run in-memory phases without changing site output.                                                           |
-| `--report-json PATH`         | Write a schema-v1 report after success or failure.                                                           |
-| `--quiet`                    | Suppress progress and build-result output.                                                                   |
-| `--verbose`                  | Add resolved paths, edition metadata, defaults, validation/image policy, and sitemap plan/publication state. |
-| `--no-color`                 | Disable all Pannonico ANSI presentation color.                                                               |
+- **`--config PATH`**
+
+  Select a config file inside the project root.
+
+- **`--pages PATH`**
+
+  Select one page file or a pages directory.
+
+- **`--layouts PATH`**
+
+  Override the layouts directory.
+
+- **`--partials PATH`**
+
+  Override the partials directory.
+
+- **`--data PATH`**
+
+  Replace project data with one invocation-local directory.
+
+- **`--out PATH`**
+
+  Override the output directory.
+
+- **`--default-layout NAME`**
+
+  Override the default layout.
+
+- **`--default-language CODE`**
+
+  Override the default language.
+
+- **`--html-validation MODE`**
+
+  Select `off`, `warn`, or `error`.
+
+- **`--max-output-workers COUNT`**
+
+  Lower the staged-file publication worker limit.
+
+- **`--dry-run`**
+
+  Run in-memory phases without changing site output.
+
+- **`--report-json PATH`**
+
+  Write a schema-v1 report after success or failure.
+
+- **`--quiet`**
+
+  Suppress progress and build-result output.
+
+- **`--verbose`**
+
+  Add resolved paths, edition metadata, defaults, validation/image policy, and sitemap plan/publication state.
+
+- **`--no-color`**
+
+  Disable all Pannonico ANSI presentation color.
 
 Native publication starts from thirty-two staged-file workers per available Go
 execution thread and is bounded by artifact count. Free and Pro use the same

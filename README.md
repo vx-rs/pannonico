@@ -51,10 +51,11 @@ const result = await build({ root: './site', out: './dist', minify: true })
 console.log(result.stdout)
 ```
 
-`build` runs the installed package's binary and returns `exitCode`, `signal`,
-`stdout`, and `stderr`. Use `beautify: true` for readable HTML or `minify: true`
-for compact output. Use `dryRun: true` to validate without publishing output.
-Failed commands reject with `PannonicoError`; its `result` retains diagnostics.
+`build` runs the binary installed by this npm package. Read `stdout` and
+`stderr` for its captured output. Set `dryRun: true` to preview and validate
+the build while leaving the output directory alone. Use `beautify: true` for
+readable HTML or `minify: true` for compact output. If the command fails,
+`PannonicoError.result` gives you the exit status and diagnostics.
 Other exports include `scaffold`, `manual`, `capabilities`, `version`, `help`,
 `signingDns`, `watch`, and `mcp`.
 

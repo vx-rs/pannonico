@@ -9,8 +9,8 @@ import type { ExecutionOptions, PannonicoResult } from './types.js'
 // Functions
 // -----------------------------------------------------------------------------
 /**
- * Read the installed binary's version, edition, and execution target.
- * Returns its exact output rather than parsing presentation text into a new schema.
+ * Returns the installed binary's version, edition, and execution target as
+ * the CLI prints them. Read `stdout` when reporting which build ran.
  */
 export const version = async (
   execution: ExecutionOptions = {},

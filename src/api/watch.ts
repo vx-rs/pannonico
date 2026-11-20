@@ -14,8 +14,10 @@ import type {
 // Functions
 // -----------------------------------------------------------------------------
 /**
- * Start native watch with inherited output and a caller-owned process lifetime.
- * Observe completed immediately; process creation does not indicate serving readiness.
+ * Starts the installed native binary's preview server and rebuild loop.
+ * The returned process exposes `completed`, which you should observe for
+ * startup errors and shutdown. Wait for the server's readiness output before
+ * sending requests. Keep the process handle if you need to stop watching.
  */
 export const watch = (
   options: WatchOptions = {},

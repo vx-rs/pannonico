@@ -14,8 +14,10 @@ import type {
 // Functions
 // -----------------------------------------------------------------------------
 /**
- * Start the installed MCP stdio server with pipes for the caller's protocol client.
- * Drain stdout/stderr and observe completed; ending stdin requests normal MCP closure.
+ * Starts the installed MCP server for the selected project. Send protocol
+ * requests on `child.stdin`, read replies from `child.stdout`, and drain
+ * `child.stderr` for diagnostics. End stdin for normal shutdown and observe
+ * `completed` for startup errors or the final exit result.
  */
 export const mcp = (
   options: RootOptions = {},

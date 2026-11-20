@@ -9,8 +9,9 @@ import type { ExecutionOptions, PannonicoResult, HelpTopic } from './types.js'
 // Functions
 // -----------------------------------------------------------------------------
 /**
- * Read root or command help from the installed binary.
- * Edition-specific help and unavailable topics retain their binary exit behavior.
+ * Returns the installed binary's command help in `stdout`. Omit `topic`
+ * for the top-level usage. A topic that the binary cannot handle fails with
+ * the same exit status as running the help command in a terminal.
  */
 export const help = async (
   topic?: HelpTopic,

@@ -129,18 +129,45 @@ Pro native and Pro WASI advertise `rich-markdown` and compile ten plugins.
 Base Markdown is the default in both editions. Setting `enabled: true` requests
 the group with all ten features selected unless individual options override it:
 
-| Option          | Syntax                                          | HTML or behavior                                                 |
-|-----------------|-------------------------------------------------|------------------------------------------------------------------|
-| `anchor`        | `# Heading`                                     | deterministic heading `id`                                       |
-| `footnote`      | `text[^name]`, `[^name]: body`, `text^[inline]` | footnote section and backlinks                                   |
-| `abbr`          | `*[HTML]: Hyper Text Markup Language`           | `<abbr title="…">HTML</abbr>`                                    |
-| `container`     | `::: warning` … `:::`                           | `<div class="pannonico-container pannonico-container--warning">` |
-| `codeHighlight` | opening fence with a `ts` identifier            | compact class-only token spans inside `.pannonico-code`          |
-| `sub`           | `H~2~O`                                         | `<sub>2</sub>`                                                   |
-| `sup`           | `29^th^`                                        | `<sup>th</sup>`                                                  |
-| `mark`          | `==text==`                                      | `<mark>text</mark>`                                              |
-| `ins`           | `++text++`                                      | `<ins>text</ins>`                                                |
-| `del`           | `~~text~~`                                      | `<del>text</del>`                                                |
+- **`anchor`**
+  - **Syntax** `# Heading`
+  - **HTML or behavior** deterministic heading `id`
+
+- **`footnote`**
+  - **Syntax** `text[^name]`, `[^name]: body`, `text^[inline]`
+  - **HTML or behavior** footnote section and backlinks
+
+- **`abbr`**
+  - **Syntax** `*[HTML]: Hyper Text Markup Language`
+  - **HTML or behavior** `<abbr title="…">HTML</abbr>`
+
+- **`container`**
+  - **Syntax** `::: warning` … `:::`
+  - **HTML or behavior** `<div class="pannonico-container pannonico-container--warning">`
+
+- **`codeHighlight`**
+  - **Syntax** opening fence with a `ts` identifier
+  - **HTML or behavior** compact class-only token spans inside `.pannonico-code`
+
+- **`sub`**
+  - **Syntax** `H~2~O`
+  - **HTML or behavior** `<sub>2</sub>`
+
+- **`sup`**
+  - **Syntax** `29^th^`
+  - **HTML or behavior** `<sup>th</sup>`
+
+- **`mark`**
+  - **Syntax** `==text==`
+  - **HTML or behavior** `<mark>text</mark>`
+
+- **`ins`**
+  - **Syntax** `++text++`
+  - **HTML or behavior** `<ins>text</ins>`
+
+- **`del`**
+  - **Syntax** `~~text~~`
+  - **HTML or behavior** `<del>text</del>`
 
 Configure the project with `richMarkdown`:
 

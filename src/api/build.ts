@@ -14,8 +14,10 @@ import type {
 // Functions
 // -----------------------------------------------------------------------------
 /**
- * Build or dry-run through the installed binary, returning captured process output.
- * The binary owns project validation, reports, capabilities, and publication.
+ * Builds the selected project with the binary installed by this npm package.
+ * With no options, it uses the invocation directory. Set `dryRun` to see the
+ * planned output and diagnostics without publishing the site. The promise
+ * returns captured output and rejects when the command fails.
  */
 export const build = async (
   options: BuildOptions = {},

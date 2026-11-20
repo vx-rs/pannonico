@@ -13,8 +13,9 @@ import type {
 // Functions
 // -----------------------------------------------------------------------------
 /**
- * Inspect the exact binary's compiled capabilities without loading a project.
- * Output remains the existing textual CLI contract, including target limitations.
+ * Prints the features compiled into the installed binary. Use the result
+ * to check its edition and runtime limits without loading a project.
+ * `stdout` contains the CLI text. With `help` set, it contains usage instead.
  */
 export const capabilities = async (
   options: CapabilitiesOptions = {},

@@ -14,8 +14,10 @@ import type {
 // Functions
 // -----------------------------------------------------------------------------
 /**
- * Display manual help or eject the binary's version-matched documentation.
- * Ejection writes below the selected destination using the CLI's overwrite policy.
+ * Returns help for the embedded manual by default. With `eject` set,
+ * the installed binary writes the manual that ships with it under
+ * `documentation/` in the selected directory. The binary enforces its
+ * existing rules for conflicts with files at the destination.
  */
 export const manual = async (
   options: ManualOptions = {},

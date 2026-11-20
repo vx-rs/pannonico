@@ -14,8 +14,10 @@ import type {
 // Functions
 // -----------------------------------------------------------------------------
 /**
- * Create an edition-matched starter using the installed binary.
- * Mode conflicts and overwrites retain existing CLI validation.
+ * Runs the installed binary to create a starter for its edition. Select a
+ * destination with `root` and choose a starter mode when you need one.
+ * The promise rejects with the binary's diagnostics if the selected mode
+ * or the files already at the destination prevent the scaffold.
  */
 export const scaffold = async (
   options: ScaffoldOptions = {},

@@ -1,8 +1,9 @@
 # Rendering context and escaping
 
-Template execution produces immutable in-memory HTML artifacts. The core API
-does not mutate output; the complete build pipeline may then apply an injected
-Pro HTML transform, validate the resulting bytes, and stage them for promotion.
+When Pannonico executes a template, it keeps the resulting HTML in memory.
+A full build can then format the HTML, apply configured Pro transforms,
+and validate the result before it writes the site. Use dry run to see the
+diagnostics without publishing the output.
 
 ## Context shape
 
@@ -17,11 +18,11 @@ Every template receives exactly these top-level namespaces:
 .nav
 ```
 
-The context constructor validates and recursively clones the five ordinary
-JSON-compatible namespaces. A nil ordinary namespace becomes an empty object.
-`.nav` is a separately validated, navigation-owned read-only graph whose
-canonical parent and child relationships may be cyclic. Mutating an ordinary
-input or an inspected context copy cannot change later rendering.
+Pannonico checks and copies the five JSON-compatible namespaces. A missing
+or null namespace becomes an empty object. Copies keep changes to the inputs
+or to an inspected context from affecting future renders. The read-only
+`.nav` tree comes from site navigation. A child can refer back to its parent,
+so a recursive walk through both directions can revisit the same node.
 
 `.data`, `.page`, and `.local` come from the immutable content snapshot.
 `.layout` contains only the selected layout's frontmatter. A page with exact
@@ -34,22 +35,61 @@ referenced page data, and identifier encoding are documented in
 
 Rendering exposes these `.pannonico` fields:
 
-| Field          | Value                                                                                    |
-|----------------|------------------------------------------------------------------------------------------|
-| `sourcePath`   | Project-relative page source path.                                                       |
-| `outputPath`   | Slash-separated generated output path.                                                   |
-| `pagePath`     | Page path without the `.html` extension.                                                 |
-| `pageName`     | Final page-path component.                                                               |
-| `layout`       | Exact selected layout name, or null when disabled.                                       |
-| `integrityManifestURL` | Origin-relative manifest URL when signing is enabled, or null otherwise. |
-| `buildDate`    | Build-wide UTC `YYYY-MM-DD` value captured at build start, honoring `SOURCE_DATE_EPOCH`. |
-| `version`      | Pannonico version supplied by metadata.                                                  |
-| `edition`      | Compiled edition supplied by metadata.                                                   |
-| `capabilities` | Ordered capability-name array supplied by metadata.                                      |
-| `language`     | Resolved language object, or null when unset.                                            |
-| `translations` | Ordered translation-link objects excluding the current page.                             |
-| `vite`         | Absent when disabled; otherwise the immutable production or development asset object.    |
-| `content`      | Absent during the page pass; trusted rendered page HTML during the layout pass.          |
+- **`sourcePath`**
+
+  Project-relative page source path.
+
+- **`outputPath`**
+
+  Slash-separated generated output path.
+
+- **`pagePath`**
+
+  Page path without the `.html` extension.
+
+- **`pageName`**
+
+  Final page-path component.
+
+- **`layout`**
+
+  Exact selected layout name, or null when disabled.
+
+- **`integrityManifestURL`**
+
+  Origin-relative manifest URL when signing is enabled, or null otherwise.
+
+- **`buildDate`**
+
+  Build-wide UTC `YYYY-MM-DD` value captured at build start, honoring `SOURCE_DATE_EPOCH`.
+
+- **`version`**
+
+  Pannonico version supplied by metadata.
+
+- **`edition`**
+
+  Compiled edition supplied by metadata.
+
+- **`capabilities`**
+
+  Ordered capability-name array supplied by metadata.
+
+- **`language`**
+
+  Resolved language object, or null when unset.
+
+- **`translations`**
+
+  Ordered translation-link objects excluding the current page.
+
+- **`vite`**
+
+  Absent when disabled; otherwise the immutable production or development asset object.
+
+- **`content`**
+
+  Absent during the page pass; trusted rendered page HTML during the layout pass.
 
 Use `{{with .pannonico.integrityManifestURL}}` when a shared layout should emit
 `<meta name="pannonico-integrity" content="{{.}}">` only for signed builds.

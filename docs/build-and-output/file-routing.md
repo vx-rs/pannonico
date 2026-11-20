@@ -1,11 +1,9 @@
 # File routing
 
-An optional `.pannonico` file at the project root assigns files in Pannonico's
-configured source roots to one of four handling modes. It controls file
-ownership only. General build settings remain in `pannonico.yaml`.
-
-Projects without `.pannonico` keep the existing behavior. Every considered
-source defaults to `pannonico`.
+Add a `.pannonico` file at the project root when some files need different
+handling. A rule can delegate a file to Vite, copy it as-is, exclude it, or
+restore normal handling. Files with no matching rule use the `pannonico`
+action. Set general build options in `pannonico.yaml`.
 
 An existing `.pannonico/` directory is not a routing file and is ignored. This
 preserves Vite configurations that place generated output below that directory.
@@ -37,12 +35,21 @@ special and remain part of the pattern.
 
 The valid actions are:
 
-| Action      | Behavior                                                                                               |
-|-------------|--------------------------------------------------------------------------------------------------------|
-| `pannonico` | Use the normal root-specific Pannonico parser, transformer, or copied-asset path. This is the default. |
-| `copy`      | Pannonico publishes original bytes unchanged. It does not parse, transform, or optimize the file.      |
-| `vite`      | Pannonico does not publish the file. The project declares external Vite ownership.                     |
-| `exclude`   | Omit the file from Pannonico processing and output.                                                    |
+- **`pannonico`**
+
+  Use the normal root-specific Pannonico parser, transformer, or copied-asset path. This is the default.
+
+- **`copy`**
+
+  Pannonico publishes original bytes unchanged. It does not parse, transform, or optimize the file.
+
+- **`vite`**
+
+  Pannonico does not publish the file. The project declares external Vite ownership.
+
+- **`exclude`**
+
+  Omit the file from Pannonico processing and output.
 
 In explanatory notation, `copy = Pannonico publishes original bytes unchanged`
 and `vite = Pannonico does not publish the file`. The equals sign is not routing
