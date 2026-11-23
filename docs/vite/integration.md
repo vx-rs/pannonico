@@ -412,7 +412,7 @@ Pannonico supports manifest formats, not individual Vite versions.
 - **`vite-backend-v1`**
   - **Selection** Automatic or explicit
   - **Status** Supported for the complete Pannonico 1.x line
-  - **Latest tested Vite** `8.3.0`
+  - **Latest tested Vite** `8.3.8`
 
 Selection order is explicit `manifestFormat`, a recognized schema marker, then
 structural detection. An unknown marker does not fall back. Automatic selection

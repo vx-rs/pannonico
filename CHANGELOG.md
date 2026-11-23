@@ -2,25 +2,31 @@
 
 ## Unreleased
 
-- **CLI**: Make the existing native watch, preview, reload and managed Vite
-  development workflow available in Free.
-- **CLI**: Subscribe reload streams before their initial connection flush so
-  a build completing as the browser connects cannot lose its reload event.
-- **CLI and LSP**: Build maintained artifacts with Go 1.27.4.
-
-- **CLI**: Make the existing optional HTML beautification and minification
-  available in Free on native and WASI. Reuse the existing
-  providers and preserve the existing formatting, validation and flag contracts.
-
 Every entry in this section starts with **CLI**, **LSP**, or **CLI and LSP**.
 An independent release moves only its selected track's entries into that
 track's version subsection.
 
-- **CLI**: Add an ESM JavaScript/TypeScript API to the npm package for the
-  installed binaries, including command options, captured results/errors and
-  watch/MCP process handles. Move npm source, tooling and tests to the public
-  pannonico repository; private source keeps Go compilation and coordinates
-  package production through explicit artifact manifests.
+## 0.8.0
+
+### CLI
+
+- Make native watch, preview, browser reload, and managed Vite development
+  available in Free. Subscribe reload streams before flushing the connection
+  so a build finishing during connection setup can deliver its reload.
+- Make optional HTML beautification and minification available in Free on
+  native and WASI.
+- Add an ESM JavaScript and TypeScript API to the npm package. It invokes the
+  installed binaries and exposes command options, captured results and errors,
+  and handles for watch and MCP processes.
+- Generate Vite projects with Vite 8.3.8 and verify the maintained React and
+  Vue examples against the refreshed Vite tooling.
+- Build with Go 1.27.4 and refreshed Go dependencies, including the stable
+  YAML v4 loader.
+
+### LSP
+
+- Build the canonical WASI language server with Go 1.27.4 and the refreshed
+  Go dependency graph, including the stable YAML v4 loader.
 
 ## 0.7.1
 

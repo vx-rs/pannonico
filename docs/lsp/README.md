@@ -89,7 +89,7 @@ Pannonico and WASM WASI Core in the workspace extension group.
 The 0.7.1 adapter keeps Neovim 0.12 as its minimum and accepts newer 0.x minor
 and patch hosts on a best-effort basis. It uses Neovim's built-in package
 manager and LSP lifecycle without `nvim-lspconfig` or Mason. Installation
-examples and maintained acceptance use Neovim 0.12.5; that is not a ceiling.
+examples and maintained acceptance use Neovim 0.12.6; that is not a ceiling.
 
 Install a matching immutable `0.7.x` release, then add the adapter in
 `init.lua`:
@@ -110,7 +110,7 @@ a root containing `pannonico.yaml` or `.pannonico`. Use `:PannonicoStatus` and
 `:PannonicoRestart` for lifecycle diagnosis.
 
 The current adapter selects `pannonico-lsp.wasm` 0.7.0 and official Wasmtime
-48.0.1. It downloads and verifies both when matching local overrides are not
+51.0.0. It downloads and verifies both when matching local overrides are not
 configured. The adapter supports the host targets declared by its pinned
 runtime manifest; it does not resolve a mutable Wasmtime release.
 
@@ -128,7 +128,7 @@ The checked-in Gradle configuration clears its default upper bound on every
 build; no release-time override is needed.
 
 The plugin starts its exact pinned `pannonico-lsp.wasm` through verified
-Wasmtime 48.0.1 for each root containing `pannonico.yaml` or `.pannonico`.
+Wasmtime 51.0.0 for each root containing `pannonico.yaml` or `.pannonico`.
 HTML and Markdown use the IDE's platform language support. The plugin ZIP
 contains neither the LSP nor Wasmtime.
 
