@@ -15,6 +15,10 @@ WASI fallback, MCP tools, and editor integration through the public Pannonico
 language server and plugins for VS Code, Neovim, and supported JetBrains
 IDEs.
 
+In Pannonico Free, native `pannonico watch` serves a local preview and reloads
+the browser when output changes. It can also start the site's Vite dev server.
+Free builds support `--beautify` and `--minify` on native and WASI.
+
 Pannonico includes bounded concurrency controls and benchmark infrastructure.
 Representative public benchmark results have not yet been published, so this
 repository makes no speed claim.
@@ -34,14 +38,14 @@ committed to this Git repository and do not use Git LFS.
 
 ## JavaScript and TypeScript API
 
-The next npm release built from this source adds a typed API over the package's
-own verified binaries. Published CLI-only versions do not have these exports.
+Pannonico 0.8.0 adds a typed API that runs the npm package's verified CLI
+binaries.
 
 Install the package in your project and call it from an ESM script with Node.js
 24 or newer. JavaScript and TypeScript use the same imports:
 
 ```sh
-npm install --save-dev pannonico
+npm install --save-dev pannonico@^0.8.0
 ```
 
 ```ts
@@ -77,14 +81,11 @@ Both commands write the same manual below `<root>/documentation/`.
 ## Editor support
 
 - Install [Pannonico for VS Code](https://marketplace.visualstudio.com/items?itemName=vx-rs.pannonico).
-- Install `vx-rs/pannonico-neovim` with a Neovim plugin manager. Neovim 0.12 or
-  newer within 0.x is required.
-- Install `Pannonico` from JetBrains Marketplace after approval. The plugin
-  keeps JetBrains build 262 as its minimum without an upper bound and uses
-  platform LSP APIs that do not require IntelliJ IDEA Ultimate. Unified IntelliJ IDEA, whose free
-  tier includes core HTML support, is the automated representative for Plugin
-  Verifier and installed-IDE acceptance; individual JetBrains product licensing
-  still applies.
+- Install [Pannonico for Neovim](https://github.com/vx-rs/pannonico-neovim)
+  with your plugin manager. It requires Neovim 0.12 or newer within 0.x.
+- Follow the installation instructions for [Pannonico for JetBrains IDEs](https://github.com/vx-rs/pannonico-jetbrains).
+  The plugin requires IntelliJ Platform 2026.2 (build 262) or newer and works
+  with the free tier of IntelliJ IDEA.
 - Read the public [language-server integration contract](https://github.com/vx-rs/pannonico-lsp).
 
 ## Compatibility
