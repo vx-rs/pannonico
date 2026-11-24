@@ -57,8 +57,9 @@ or MCP build to check rendered HTML and errors that depend on execution.
 
 ## VS Code
 
-The current adapter requires VS Code 1.100 or newer and a trusted file-backed
-local, Remote-WSL, Remote-SSH, or Dev Container workspace. It discovers regular
+The adapter requires VS Code 1.144.0 or a newer 1.x version and a trusted,
+file-backed local, Remote-WSL, Remote-SSH, or Dev Container workspace.
+It discovers regular
 `pannonico.yaml` and `.pannonico` project markers; a markerless workspace can be
 selected manually. Codespaces, other remote providers, Restricted Mode,
 virtual workspaces, and VS Code for the Web are not supported.
@@ -79,10 +80,10 @@ The contributed commands are:
 Start discovers marked projects. Restart targets the active editor's project
 when ownership is unambiguous; Restart All rediscovers the workspace.
 
-Install `vx-rs.pannonico` from the Visual Studio Marketplace only after the
-selected extension version is published. The extension downloads and verifies
-its pinned LSP on first project use. In a supported remote window, install both
-Pannonico and WASM WASI Core in the workspace extension group.
+Install [Pannonico for VS Code from Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=vx-rs.pannonico).
+The extension downloads and verifies its pinned LSP on first project use.
+In a supported remote window, install both Pannonico and WASM WASI Core in
+the workspace extension group.
 
 ## Neovim
 
@@ -132,11 +133,10 @@ Wasmtime 51.0.0 for each root containing `pannonico.yaml` or `.pannonico`.
 HTML and Markdown use the IDE's platform language support. The plugin ZIP
 contains neither the LSP nor Wasmtime.
 
-After Marketplace publication, install Pannonico through the IDE's Plugins
-settings. Before Marketplace approval, an explicitly provided matching GitHub
-Release ZIP can be installed with **Install Plugin from Disk** without
-extracting or repackaging it. A candidate file in the source tree is not a
-published installation path.
+Install [Pannonico from JetBrains Marketplace](https://plugins.jetbrains.com/plugin/34033-pannonico)
+or find it in the IDE's **Plugins** settings. For manual installation, download
+the matching [GitHub release ZIP](https://github.com/vx-rs/pannonico-jetbrains/releases)
+and select the ZIP directly with **Install Plugin from Disk**.
 
 ## Release contract
 

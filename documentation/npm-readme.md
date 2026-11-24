@@ -82,9 +82,10 @@ Both commands write the same manual below `<root>/documentation/`.
 - Install [Pannonico for VS Code](https://marketplace.visualstudio.com/items?itemName=vx-rs.pannonico).
 - Install [Pannonico for Neovim](https://github.com/vx-rs/pannonico-neovim)
   with your plugin manager. It requires Neovim 0.12 or newer within 0.x.
-- Follow the installation instructions for [Pannonico for JetBrains IDEs](https://github.com/vx-rs/pannonico-jetbrains).
+- Install [Pannonico for JetBrains IDEs](https://plugins.jetbrains.com/plugin/34033-pannonico).
   The plugin requires IntelliJ Platform 2026.2 (build 262) or newer and works
-  with the free tier of IntelliJ IDEA.
+  with the free tier of IntelliJ IDEA. See the [plugin documentation](https://github.com/vx-rs/pannonico-jetbrains)
+  for setup and manual installation.
 - Read the public [language-server integration contract](https://github.com/vx-rs/pannonico-lsp).
 
 ## Compatibility
