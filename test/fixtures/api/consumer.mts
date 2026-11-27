@@ -7,6 +7,7 @@ import {
   mkdir,
   mkdtemp,
   readFile,
+  realpath,
   rm,
   writeFile,
   access,
@@ -119,8 +120,10 @@ const initializeMcp = async (session: PannonicoProcess): Promise<void> => {
 
 // Acceptance
 // -----------------------------------------------------------------------------
+// The installed scaffold checks every ancestor. Use the physical temp
+// parent because macOS reports the system temp directory through /var.
 const SCRATCH = await mkdtemp(
-  path.join(os.tmpdir(), 'pannonico-api-installed-'),
+  path.join(await realpath(os.tmpdir()), 'pannonico-api-installed-'),
 )
 try {
   const leaf = '--site č'

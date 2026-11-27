@@ -2,7 +2,15 @@
 // -----------------------------------------------------------------------------
 // Node.js
 import { spawnSync } from 'node:child_process'
-import { cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
+import {
+  cp,
+  mkdir,
+  mkdtemp,
+  readFile,
+  realpath,
+  rm,
+  writeFile,
+} from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
@@ -34,9 +42,15 @@ if (process.env.API_TEST_ECHO === '1') {
 
 // Functions
 // -----------------------------------------------------------------------------
-/** Build an isolated installed-layout fixture so tests cannot select a production executable. */
+/**
+ * Create a disposable installed layout for testing the real API with a test
+ * executable. Use the physical temp parent so the spawned process reports
+ * the same working directory when macOS exposes it through the /var alias.
+ */
 const fixture = async (program = CLI_FIXTURE) => {
-  const root = await mkdtemp(path.join(os.tmpdir(), 'pannonico-api-'))
+  const root = await mkdtemp(
+    path.join(await realpath(os.tmpdir()), 'pannonico-api-'),
+  )
   FIXTURES.push(root)
   await mkdir(path.join(root, 'dist'), { recursive: true })
   await cp(
